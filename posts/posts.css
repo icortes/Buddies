@@ -1,1 +1,9 @@
 /* Posts Page CSS */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: purple;
+}
