@@ -3,11 +3,25 @@
 'use strict';
 
 let loginData = getLoginData();
+let apiURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/api';
+let postsLimit = 10;
+let postsOffset = 0;
 
 //on window load
 onload = async () => {
-  let userResponse = await fetch(
-    `http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/${loginData.username}`,
+  // fetch for user data
+  let userResponse = await fetch(`${apiURL}/users/${loginData.username}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${loginData.token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  // fetch for posts
+  let postsResponse = await fetch(
+    `${apiURL}/posts?limit=${postsLimit},offset=${postsOffset}`,
     {
       method: 'GET',
       headers: {
@@ -21,9 +35,145 @@ onload = async () => {
   let user = await userResponse.json();
   console.log(user);
 
+  let posts = await postsResponse.json();
+  console.log(posts);
+
   document.getElementById('userFullName').textContent = user.fullName;
   document.getElementById('userName').textContent = `@${user.username}`;
   document.getElementById('userBio').textContent = user.bio;
+
+  let postsContainer = document.getElementById('postsContainer');
+
+  let usersContext = new Map();
+
+  posts.map(async (post) => {
+    //console.log(usersContext.has(post.username));
+
+    let userPostInfoResponse = await fetch(`${apiURL}/users/${post.username}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${loginData.token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    let userPostInfo = await userPostInfoResponse.json();
+
+    //console.log(userPostInfo);
+    post = { ...post, fullName: userPostInfo.fullName, bio: userPostInfo.bio };
+    console.log(post);
+
+    let postHTML = ` <div class="col-12">
+              <!-- Card feed item START -->
+              <div class="card h-100">
+                <!-- Card body START -->
+                <div class="card-body">
+                  <!-- Post User -->
+                  <div class="d-flex align-items-center mb-2">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-story me-2">
+                      <a href="#!">
+                        <img
+                          class="avatar-img rounded-circle"
+                          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                          alt=""
+                          width="40px" />
+                      </a>
+                    </div>
+                    <!-- Info -->
+                    <div>
+                      <div class="nav nav-divider">
+                        <h6 class="nav-item card-title mb-0">
+                          <a href="#">
+                            ${post.fullName}
+                            <span class="nav-item small fw-normal"> @${
+                              post.username
+                            } </span>
+                            <span class="nav-item small text-secondary fw-normal"
+                              >• 2hr</span
+                            ></a
+                          >
+                        </h6>
+                      </div>
+                      <p class="mb-0 small">${post.bio}</p>
+                    </div>
+                  </div>
+                  <!-- Info -->
+                  <p class="text-body"
+                    >${post.text}</p
+                  >
+
+                  <!-- LIKE SHARE COMMENT -->
+                  <ul
+                    class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top py-1 mt-3">
+                    <li class="nav-item">
+                      <!-- add active class when liked -->
+                      <a class="nav-link mb-0" href="">
+                        <i class="bi bi-heart pe-1"></i>${
+                          post.likes.length ? `Likes (${post.likes.length})` : 'Like'
+                        }</a
+                      >
+                    </li>
+                    <!-- Card share action menu START -->
+                    <li class="nav-item dropdown">
+                      <a
+                        href="#"
+                        class="nav-link mb-0"
+                        id="cardShareAction4"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+                      </a>
+                      <!-- Card share action dropdown menu -->
+                      <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="cardShareAction4">
+                        <li>
+                          <a class="dropdown-item" href="">
+                            <i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct
+                            Message</a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="">
+                            <i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="">
+                            <i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="">
+                            <i class="bi bi-share fa-fw pe-2"></i>Share post via …</a
+                          >
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                          <a class="dropdown-item" href="">
+                            <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News
+                            Feed</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <!-- Card share action menu END -->
+                    <li class="nav-item">
+                      <a class="nav-link" href="">
+                        <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <!-- Card body END -->
+              </div>
+              <!-- Card feed item END -->
+            </div>`;
+
+    postsContainer.insertAdjacentHTML('beforeend', postHTML);
+  });
 
   // let postsResponse = await fetch(
   //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
