@@ -19,7 +19,7 @@
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="./landing.css">
 
-    <title>Login to the Microblog Network!</title>
+    <title>Landing Page</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
     <script src="./auth.js"></script>
@@ -29,39 +29,42 @@
 </head>
 
 <body>
-
+    <div class="container">
     <header>
-        <!-- <h1>Welcome to <code>YOUR MICROBLOG NETWORK</code></h1> -->
-        <!-- nav bar here. -->
-        <nav class="navbar navbar-expand-lg" style="background-image: url(images/main-page/targets.jpg);">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><span class="h3">Buddies</span>
-                    <img src="assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav lead">
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><span class="h4">Sign up</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html"><span class="h4">Sign in</span></a>
-                        </li>
-                        </li>
-                    </ul>
+       
+            <!-- <h1>Welcome to <code>YOUR MICROBLOG NETWORK</code></h1> -->
+            <!-- nav bar here. -->
+            <nav class="navbar navbar-expand-lg" style="background-image: url(images/main-page/targets.jpg);">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html"><span class="h3">Buddies</span>
+                        <img src="assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav lead">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup/index.html"><span class="h4">Sign up</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="login.html"><span class="h4">Sign in</span></a>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
     </header>
 
     <main>
-        <div class="div" style="background-image: url(images/main-page/targets.jpg);">
-            <div class="p-3 mb-2 bg-dark text-white text-center h5">Buddies - Connecting People</div>
+        
+        <div class="div">
+            
             <div class="container">
+                <div class="p-3 mb-2 bg-dark text-white text-center h5">Buddies - Connecting People</div>
                 <div class="row">
                     <div class="col mb-2">
                         <img src="assets/images/1.jpg" class="img-fluid" alt="error" width="300">
@@ -96,23 +99,21 @@
                     <!-- <h4>Use it on the go</h4>
                     <img src="Images/Carousel/caro6.PNG" alt="" srcset="" width="200"> -->
                 </div>
-                
+
                 <!-- Column 2 -->
                 <div class="col-sm-6">
                     <form id="login">
                         <div>
-                            <h4>Login</h4>
-                            <label for="username">Username</label>
-                            <input type="text" id="username" minlength="3">
+                            <h4>Sign in</h4>
+                            <input type="text" id="username" minlength="3" placeholder="username">
                         </div>
 
                         <div>
-                            <label for="password">Password</label>
-                            <input type="password" id="password" minlength="6">
+                            <input type="password" id="password" minlength="6" placeholder="password">
                         </div>
-                        <button id="loginButton" type="submit">Login</button>
+                        <button id="loginButton" type="submit">Sign in</button>
                     </form>
-                    <p>New User? Go To Sign Up Page</p>
+                    <p>New User? <a href="/signup/index.html">Sign Up</a></p>
                 </div>
             </div>
         </div>
@@ -120,7 +121,7 @@
         <div class="p-3 bg-dark text-white text-center">
 
             <span>
-                <a class="navbar-brand" href="products.html">
+                <a class="navbar-brand" href="/signup/index.html">
                     <p class="h4">The future is here. Sign up today!</p>
                     <img src="assets/icons/icon.PNG" alt="image" width="60" height="auto">
                 </a>
@@ -140,6 +141,7 @@
             </p>
         </div>
     </footer>
+</div>
 
     <!-- Page-specific code -->
     <script src="./landing.js"></script>

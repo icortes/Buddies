@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!-- Global CSS (CSS rules you want applied to all pages) -->
+    <link rel="stylesheet" href="/global.css">
+
+    <!-- Page-specific CSS -->
+    <link rel="stylesheet" href="signup.css">
+
+    <title>Sign Up Page</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+
+            <!-- nav bar here. -->
+            <nav class="navbar navbar-expand-lg" style="background-image: url(images/main-page/targets.jpg);">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/index.html"><span class="h3">Buddies</span>
+                        <img src="/assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav lead">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/signup/index.html"><span class="h4">Sign up</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/index.html"><span class="h4">Sign in</span></a>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <main>
+
+            <div class="p-3 mb-2 bg-dark text-white text-center h5">Buddies - Connecting People</div>
+            <!-- sign in form and website description. -->
+            <div class="container">
+                <div class="row">
+                    <!-- Column 1 -->
+                    <div class="col-sm-6">
+                        <h4>After creating an account you will:</h4>
+                        <ul>
+                            <li>Build your community</li>
+                            <li>Discuss lates events</li>
+                            <li>Meet new people</li>
+                            <li>And much more!</li>
+                        </ul>
+                        <!-- <h4>Use it on the go</h4>
+                    <img src="Images/Carousel/caro6.PNG" alt="" srcset="" width="200"> -->
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="col-sm-6">
+                        <form id="login">
+                            <div>
+                                <h4>Sign Up</h4>
+                                <input type="text" id="username" minlength="3" placeholder="username">
+                            </div>
+                            <div>
+                                
+                                <input type="password" id="password" minlength="6" placeholder="full name">
+                            </div>
+                            <div>
+                                <!-- <label for="password">Password</label> -->
+                                <input type="password" id="password" minlength="6" placeholder="password">
+                            </div>
+                            <button id="loginButton" type="submit">Register</button>
+                        </form>
+                        <p>Already a member? <a href="/index.html">Log In</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- sign up section at the bottom -->
+        </main>
+
+        <!-- Footer-->
+        <footer>
+            <div class="footer">
+                <p>&copy; 2023 Buddies. All Rights Reserved.
+
+                    <span class="icons">
+                        <a href=""> <img src="/assets/icons/app-store.svg" alt="broken link linkedIn" width="100"></a>
+
+                        <a href=""> <img src="/assets/icons/google-play.svg" alt="broken link github" width="100"></a>
+                    </span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- Page-specific code -->
+    <script src="./landing.js"></script>
+</body>
+
+</html>
