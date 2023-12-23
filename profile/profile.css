@@ -1,0 +1,59 @@
+h1 {
+    text-align: center;
+}
+nav {
+    z-index: 5;
+}
+#user-profile-container {
+    margin: auto;
+}
+#user-interface {
+    z-index: 1;
+
+}
+
+#user-info {
+    display:flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    height:60vw;
+    z-index: 1;
+    background: rgb(35, 14, 106);
+    background: linear-gradient(184deg, rgba(35, 14, 106, 1) 16%, rgba(50, 20, 151, 1) 46%, rgba(24, 132, 140, 1) 83%);
+}
+#bio {
+    color: white;
+}
+
+#user-activities {
+    /* just to see where div is */
+    background-color: blue;
+}
+
+#display-user-data-type {
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+
+#profile-img {
+    border-radius: 50%; 
+    background-color: white;
+    width: 50%;
+}
+
+.change-display-btn {
+    margin-bottom: 5%;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.change-display-btn > img {
+    width: 3vw;
+}
+
+.change-display-btn > p {
+    margin-left: 20px;;
+    font-size: 30px;
+}
