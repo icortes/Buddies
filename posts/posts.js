@@ -11,13 +11,35 @@ let postsOffset = 0;
 const userCache = {};
 
 /**
+ * Fetch user information for the left sidebar.
+ */
+async function fetchUserInfo() {
+  // fetch for user data
+  let userResponse = await fetch(`${apiURL}/users/${loginData.username}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${loginData.token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  let user = await userResponse.json();
+  console.log(user);
+
+  document.getElementById('userFullName').textContent = user.fullName;
+  document.getElementById('userName').textContent = `@${user.username}`;
+  document.getElementById('userBio').textContent = user.bio;
+}
+
+/**
  * Checks if the post author is in *userCache*.
  * If post author is found in cache, use the cache to add *fullName* and *bio* to the post object.
  * Otherwise, fetch the post author information, add it to the cache and to the post object.
- * @param {*} post 
+ * @param {*} post
  * @returns post with name of the author and bio
  */
-async function fetchUserInformation(post) {
+async function fetchAuthorInformation(post) {
   if (userCache[post.username]) {
     console.log('using cache for:', post.username);
     // If user information is in the cache, use it directly
@@ -59,7 +81,7 @@ async function sequentiallyResolvePosts(posts) {
     let resolvedPosts = [];
 
     for (const post of posts) {
-      const resolvedPost = await fetchUserInformation(post);
+      const resolvedPost = await fetchAuthorInformation(post);
       resolvedPosts.push(resolvedPost);
     }
 
@@ -70,18 +92,7 @@ async function sequentiallyResolvePosts(posts) {
   }
 }
 
-//on window load
-onload = async () => {
-  // fetch for user data
-  let userResponse = await fetch(`${apiURL}/users/${loginData.username}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${loginData.token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
+async function fetchPosts() {
   // fetch for posts
   let postsResponse = await fetch(
     `${apiURL}/posts?limit=${postsLimit},offset=${postsOffset}`,
@@ -95,15 +106,8 @@ onload = async () => {
     }
   );
 
-  let user = await userResponse.json();
-  console.log(user);
-
   let posts = await postsResponse.json();
   console.log(posts);
-
-  document.getElementById('userFullName').textContent = user.fullName;
-  document.getElementById('userName').textContent = `@${user.username}`;
-  document.getElementById('userBio').textContent = user.bio;
 
   let postsContainer = document.getElementById('postsContainer');
 
@@ -116,20 +120,7 @@ onload = async () => {
       addPostToPage(post);
     });
   });
-
-  // let postsResponse = await fetch(
-  //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
-  //   {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       Authorization: `Bearer ${loginData.token}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formData),
-  //   }
-  // );
-};
+}
 
 function addPostToPage(post) {
   let postsContainer = document.getElementById('postsContainer');
@@ -244,3 +235,28 @@ function addPostToPage(post) {
 
   postsContainer.insertAdjacentHTML('beforeend', postHTML);
 }
+
+function newPostHandler() {
+  // let postsResponse = await fetch(
+  //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
+  //   {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       Authorization: `Bearer ${loginData.token}`,
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formData),
+  //   }
+  // );
+}
+
+//on window load
+onload = async () => {
+  await fetchUserInfo();
+
+  await fetchPosts();
+
+  newPostHandler();
+
+};
