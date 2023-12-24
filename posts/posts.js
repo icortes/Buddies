@@ -7,6 +7,9 @@ let apiURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/api';
 let postsLimit = 10;
 let postsOffset = 0;
 
+let postsContainer = document.getElementById('postsContainer');
+let spinner = document.getElementById('spinner');
+
 // cache to store user name and bio from the posts
 const userCache = {};
 
@@ -70,6 +73,7 @@ async function fetchAuthorInformation(post) {
       fullName: userPostInfo.fullName,
       bio: userPostInfo.bio,
     };
+
     console.log(userCache);
     return { ...post, fullName: userPostInfo.fullName, bio: userPostInfo.bio };
   }
@@ -122,9 +126,7 @@ async function fetchPosts() {
   });
 }
 
-function addPostToPage(post) {
-  let postsContainer = document.getElementById('postsContainer');
-
+function addPostToPage(post, position = 'beforeend') {
   let postHTML = ` <div class="col-12">
               <!-- Card feed item START -->
               <div class="card h-100">
@@ -233,22 +235,41 @@ function addPostToPage(post) {
               <!-- Card feed item END -->
             </div>`;
 
-  postsContainer.insertAdjacentHTML('beforeend', postHTML);
+  postsContainer.insertAdjacentHTML(position, postHTML);
 }
 
 function newPostHandler() {
-  // let postsResponse = await fetch(
-  //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
-  //   {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       Authorization: `Bearer ${loginData.token}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formData),
-  //   }
-  // );
+  let submitNewPost = document.getElementById('submitNewPost');
+  submitNewPost.addEventListener('click', async () => {
+    let newPost = document.getElementById('newPost');
+    let text = newPost.value;
+
+    //handle empty text area
+    if (text == '') {
+      console.log('empty text area');
+    } else {
+      let postResponse = await fetch(`${apiURL}/posts`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${loginData.token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      console.log(postResponse.ok);
+
+      if (postResponse.ok) {
+        postsContainer.innerHTML = '';
+        postsContainer.insertAdjacentHTML('beforeend', spinner.outerHTML);
+
+        await fetchPosts();
+      }
+    }
+
+    newPost.value = null;
+  });
 }
 
 //on window load
@@ -258,5 +279,4 @@ onload = async () => {
   await fetchPosts();
 
   newPostHandler();
-
 };
