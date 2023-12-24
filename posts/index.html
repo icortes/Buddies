@@ -184,7 +184,7 @@
                 <!-- Copyright -->
                 <p class="small text-center mt-1">
                   ©2023
-                  <a class="text-reset" target="_blank" href="/"> ByteBuddies </a>
+                  <a class="text-reset" target="_blank" href="/"> Buddies </a>
                 </p>
               </div>
             </div>
@@ -194,10 +194,70 @@
 
         <!-- POSTS SECTION -->
         <div class="col overflow-hidden">
-          <section class="row g-4" id="postsContainer">
-            <!-- Posts Starts Here -->
-          
-          </section>
+          <!-- Input Box -->
+          <div class="card card-body mb-4">
+            <div class="d-flex mb-3">
+              <!-- Avatar -->
+              <div class="avatar avatar-xs me-2">
+                <a href="#">
+                  <img
+                    class="avatar-img rounded-circle"
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                    width="35px"
+                    alt="" />
+                </a>
+              </div>
+              <!-- Post input -->
+              <form class="w-100">
+                <textarea
+                  class="form-control pe-4 border-0"
+                  id="newPost"
+                  rows="2"
+                  data-autoresize=""
+                  placeholder="Share your thoughts..."></textarea>
+              </form>
+            </div>
+            <!-- Share feed toolbar START -->
+            <ul class="nav nav-pills nav-stack small fw-normal">
+              <li class="nav-item">
+                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!">
+                  <i class="bi bi-image-fill text-success pe-2"></i>Photo</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!">
+                  <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link bg-light py-1 px-2 mb-0">
+                  <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!">
+                  <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling
+                  /Activity</a
+                >
+              </li>
+              <li class="nav-item dropdown ms-lg-auto">
+                <button class="nav-link bg-success-subtle py-1 px-2 mb-0 text-reset" href="#" id="feedActionShare">
+                  <i class="bi bi-send"></i> SEND
+                </button>
+              </li>
+            </ul>
+            <!-- Share feed toolbar END -->
+          </div>
+
+          <!-- Posts Starts Here -->
+          <div class="row g-4" id="postsContainer">
+            <!-- Loading Spinner -->
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

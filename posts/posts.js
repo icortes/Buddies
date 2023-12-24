@@ -7,6 +7,69 @@ let apiURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/api';
 let postsLimit = 10;
 let postsOffset = 0;
 
+// cache to store user name and bio from the posts
+const userCache = {};
+
+/**
+ * Checks if the post author is in *userCache*.
+ * If post author is found in cache, use the cache to add *fullName* and *bio* to the post object.
+ * Otherwise, fetch the post author information, add it to the cache and to the post object.
+ * @param {*} post 
+ * @returns post with name of the author and bio
+ */
+async function fetchUserInformation(post) {
+  if (userCache[post.username]) {
+    console.log('using cache for:', post.username);
+    // If user information is in the cache, use it directly
+    return {
+      ...post,
+      fullName: userCache[post.username].fullName,
+      bio: userCache[post.username].bio,
+    };
+  } else {
+    console.log('using fetch for new person:', post.username);
+    let userPostInfoResponse = await fetch(`${apiURL}/users/${post.username}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${loginData.token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!userPostInfoResponse.ok) {
+      throw new Error(`Error fetching user information for ${post.username}`);
+    }
+
+    let userPostInfo = await userPostInfoResponse.json();
+
+    // Store user information in the cache
+    userCache[post.username] = {
+      fullName: userPostInfo.fullName,
+      bio: userPostInfo.bio,
+    };
+    console.log(userCache);
+    return { ...post, fullName: userPostInfo.fullName, bio: userPostInfo.bio };
+  }
+}
+
+// Async function to sequentially resolve posts
+async function sequentiallyResolvePosts(posts) {
+  try {
+    let resolvedPosts = [];
+
+    for (const post of posts) {
+      const resolvedPost = await fetchUserInformation(post);
+      resolvedPosts.push(resolvedPost);
+    }
+
+    return resolvedPosts;
+  } catch (error) {
+    // Handle errors during the sequential resolution
+    throw new Error(`Error resolving posts sequentially: ${error.message}`);
+  }
+}
+
 //on window load
 onload = async () => {
   // fetch for user data
@@ -44,27 +107,34 @@ onload = async () => {
 
   let postsContainer = document.getElementById('postsContainer');
 
-  let usersContext = new Map();
+  sequentiallyResolvePosts(posts).then((resolvedPosts) => {
+    console.log(resolvedPosts);
 
-  posts.map(async (post) => {
-    //console.log(usersContext.has(post.username));
+    postsContainer.innerHTML = '';
 
-    let userPostInfoResponse = await fetch(`${apiURL}/users/${post.username}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${loginData.token}`,
-        'Content-Type': 'application/json',
-      },
+    resolvedPosts.forEach((post) => {
+      addPostToPage(post);
     });
+  });
 
-    let userPostInfo = await userPostInfoResponse.json();
+  // let postsResponse = await fetch(
+  //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
+  //   {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       Authorization: `Bearer ${loginData.token}`,
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formData),
+  //   }
+  // );
+};
 
-    //console.log(userPostInfo);
-    post = { ...post, fullName: userPostInfo.fullName, bio: userPostInfo.bio };
-    console.log(post);
+function addPostToPage(post) {
+  let postsContainer = document.getElementById('postsContainer');
 
-    let postHTML = ` <div class="col-12">
+  let postHTML = ` <div class="col-12">
               <!-- Card feed item START -->
               <div class="card h-100">
                 <!-- Card body START -->
@@ -172,19 +242,5 @@ onload = async () => {
               <!-- Card feed item END -->
             </div>`;
 
-    postsContainer.insertAdjacentHTML('beforeend', postHTML);
-  });
-
-  // let postsResponse = await fetch(
-  //   'http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts',
-  //   {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       Authorization: `Bearer ${loginData.token}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formData),
-  //   }
-  // );
-};
+  postsContainer.insertAdjacentHTML('beforeend', postHTML);
+}
