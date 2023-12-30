@@ -123,6 +123,9 @@ async function fetchPosts() {
     resolvedPosts.forEach((post) => {
       addPostToPage(post);
     });
+
+    //add connections after all users have been cached
+    addConnectionsFromCache();
   });
 }
 
@@ -236,6 +239,39 @@ function addPostToPage(post, position = 'beforeend') {
             </div>`;
 
   postsContainer.insertAdjacentHTML(position, postHTML);
+}
+
+function addConnectionsFromCache() {
+  let connectionsContainer = document.getElementById('connectionsContainer');
+
+  connectionsContainer.innerHTML = '';
+  for (const key of Object.keys(userCache)) {
+    let connectionHtml = `<div class="hstack gap-2 mb-3">
+                    
+                    <div class="avatar">
+                      <a href="#"
+                        ><img class="avatar-img rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" width="48px"
+                      /></a>
+                    </div>
+                    
+                    <div class="overflow-hidden">
+                      <a class="h6 mb-0" href="#!">${userCache[key].fullName} </a>
+                      <p class="mb-0 small text-truncate">${userCache[key].bio}</p>
+                    </div>
+                    
+                    <a
+                      class="btn btn-primary-soft rounded-circle icon-md ms-auto"
+                      href="#"
+                      ><i class="bi bi-plus-circle fs-3"></i></a>
+                  </div>`;
+
+    connectionsContainer.insertAdjacentHTML('beforeend', connectionHtml);
+  }
+  let viewMore = `
+                  <div class="d-grid mt-3">
+                    <a class="btn btn-sm btn-primary-soft" href="#">View more</a>
+                  </div>`;
+  connectionsContainer.insertAdjacentHTML('beforeend', viewMore);
 }
 
 function newPostHandler() {
