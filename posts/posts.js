@@ -172,7 +172,7 @@ function addPostToPage(post, position = 'beforeend') {
                     class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top py-1 mt-3">
                     <li class="nav-item">
                       <!-- add active class when liked -->
-                      <a class="nav-link mb-0" href="">
+                      <a class="nav-link mb-0" href="#">
                         <i class="bi bi-heart pe-1"></i>${
                           post.likes.length ? `Likes (${post.likes.length})` : 'Like'
                         }</a
