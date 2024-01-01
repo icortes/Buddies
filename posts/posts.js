@@ -246,8 +246,12 @@ function addConnectionsFromCache() {
 
   connectionsContainer.innerHTML = '';
   for (const key of Object.keys(userCache)) {
+    console.log(key);
+    //skip person logged in from who to follow
+    if (loginData.username == key) continue;
+
     let connectionHtml = `<div class="hstack gap-2 mb-3">
-                    
+
                     <div class="avatar">
                       <a href="#"
                         ><img class="avatar-img rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" width="48px"
@@ -259,10 +263,11 @@ function addConnectionsFromCache() {
                       <p class="mb-0 small text-truncate">${userCache[key].bio}</p>
                     </div>
                     
-                    <a
+                    <button
                       class="btn btn-primary-soft rounded-circle icon-md ms-auto"
-                      href="#"
-                      ><i class="bi bi-plus-circle fs-3"></i></a>
+                      onclick="addFriend();"
+                      data-username="${key}"
+                      ><i class="bi bi-plus-circle fs-3"></i></button>
                   </div>`;
 
     connectionsContainer.insertAdjacentHTML('beforeend', connectionHtml);
