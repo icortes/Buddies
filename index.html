@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/icons/icon2.PNG">
+    <!-- import google fonts Roboto. works with css rule in landing css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,7 +26,7 @@
     <!-- Page-specific CSS -->
     <link rel="stylesheet" href="./landing.css">
 
-    <title>Login to the Microblog Network!</title>
+    <title>Landing Page</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload - don't add the `defer` attribute): -->
     <script src="./auth.js"></script>
@@ -29,117 +36,123 @@
 </head>
 
 <body>
+    <div class="container">
+        <header>
 
-    <header>
-        <!-- <h1>Welcome to <code>YOUR MICROBLOG NETWORK</code></h1> -->
-        <!-- nav bar here. -->
-        <nav class="navbar navbar-expand-lg" style="background-image: url(images/main-page/targets.jpg);">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><span class="h3">Buddies</span>
-                    <img src="assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav lead">
-                        <li class="nav-item">
-                            <a class="nav-link" href=""><span class="h4">Sign up</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html"><span class="h4">Sign in</span></a>
-                        </li>
-                        </li>
-                    </ul>
+            <!-- <h1>Welcome to <code>YOUR MICROBLOG NETWORK</code></h1> -->
+            <!-- nav bar here. -->
+            <nav class="navbar navbar-expand-lg" >
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html"><span class="h3">Buddies</span>
+                        <img src="assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav lead">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup/index.html"><span class="h4">Sign up</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.html"><span class="h4">Sign in</span></a>
+                            </li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+            <div class="div">
+
+                <div class="container">
+                    <div class="text">
+                        <div class="p-3 mb-2 bg-dark text-white text-center h5 title">Buddies - Connecting People</div>
+                        <span class="vertical one"></span>
+                        <span class="vertical two"></span>
+                        <span class="horizontal one"></span>
+                        <span class="horizontal two"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <img src="assets/images/1.jpg" class="img-fluid" alt="error" width="300">
+                        </div>
+
+                        <div class="col mb-2">
+                            <img src="assets/images/2.jpg" class="img-fluid" alt="error" width="300">
+                        </div>
+
+                        <div class="col mb-2">
+                            <img src="assets/images/4.jpg" class="img-fluid" alt="error" width="300">
+                        </div>
+
+                        <div class="col mb-2">
+                            <img src="assets/images/3.jpg" class="img-fluid" alt="error" width="300">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="div" style="background-image: url(images/main-page/targets.jpg);">
-            <div class="p-3 mb-2 bg-dark text-white text-center h5">Buddies - Connecting People</div>
+            <!-- sign in form and website description. -->
             <div class="container">
                 <div class="row">
-                    <div class="col mb-2">
-                        <img src="assets/images/1.jpg" class="img-fluid" alt="error" width="300">
+                    <!-- Column 1 -->
+                    <div class="col-sm-6">
+                        <h4>After creating an account you will:</h4>
+                        <ul class="h5">
+                            <li>Build your community</li>
+                            <li>Discuss latest events</li>
+                            <li>Meet new people</li>
+                            <li>And much more!</li>
+                        </ul>
                     </div>
 
-                    <div class="col mb-2">
-                        <img src="assets/images/2.jpg" class="img-fluid" alt="error" width="300">
-                    </div>
+                    <!-- Column 2 -->
+                    <div class="col-sm-6">
+                        <form id="login">
+                            <div>
+                                <h4>Sign in</h4>
+                                <input class="mb-2" type="text" id="username" minlength="3" placeholder="username">
+                            </div>
 
-                    <div class="col mb-2">
-                        <img src="assets/images/4.jpg" class="img-fluid" alt="error" width="300">
-                    </div>
-
-                    <div class="col mb-2">
-                        <img src="assets/images/3.jpg" class="img-fluid" alt="error" width="300">
+                            <div>
+                                <input class="mb-2" type="password" id="password" minlength="5" placeholder="password">
+                            </div>
+                            <button id="loginButton" type="submit">Sign in</button>
+                        </form>
+                        <p>New User? <a href="/signup/index.html">Sign Up</a></p>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- sign in form and website description. -->
-        <div class="container">
-            <div class="row">
-                <!-- Column 1 -->
-                <div class="col-sm-6">
-                    <h4>After creating an account you will:</h4>
-                    <ul>
-                        <li>Build your community</li>
-                        <li>Discuss lates events</li>
-                        <li>Meet new people</li>
-                        <li>And much more!</li>
-                    </ul>
-                    <!-- <h4>Use it on the go</h4>
-                    <img src="Images/Carousel/caro6.PNG" alt="" srcset="" width="200"> -->
-                </div>
-                
-                <!-- Column 2 -->
-                <div class="col-sm-6">
-                    <form id="login">
-                        <div>
-                            <h4>Login</h4>
-                            <label for="username">Username</label>
-                            <input type="text" id="username" minlength="3">
-                        </div>
+            <!-- sign up section at the bottom -->
+            <div class="p-3 bg-dark text-white text-center">
 
-                        <div>
-                            <label for="password">Password</label>
-                            <input type="password" id="password" minlength="6">
-                        </div>
-                        <button id="loginButton" type="submit">Login</button>
-                    </form>
-                    <p>New User? Go To Sign Up Page</p>
-                </div>
+                <span>
+                    <a class="navbar-brand" href="/signup/index.html">
+                        <p class="h5 bottom-text">The future is here. Sign up today!</p>
+                        <img class="icon" src="assets/icons/icon2.PNG" alt="image" width="60" height="auto">
+                    </a>
             </div>
-        </div>
-        <!-- sign up section at the bottom -->
-        <div class="p-3 bg-dark text-white text-center">
+        </main>
 
-            <span>
-                <a class="navbar-brand" href="products.html">
-                    <p class="h4">The future is here. Sign up today!</p>
-                    <img src="assets/icons/icon.PNG" alt="image" width="60" height="auto">
-                </a>
-        </div>
-    </main>
+        <!-- Footer-->
+        <footer>
+            <div class="footer">
+                <p>&copy; 2023 Buddies. All Rights Reserved.
 
-    <!-- Footer-->
-    <footer>
-        <div class="footer">
-            <p>&copy; 2023 Buddies. All Rights Reserved.
+                    <span class="icons">
+                        <a href=""> <img src="assets/icons/app-store.svg" alt="broken link linkedIn" width="100"></a>
 
-                <span class="icons">
-                    <a href=""> <img src="assets/icons/app-store.svg" alt="broken link linkedIn" width="100"></a>
-
-                    <a href=""> <img src="assets/icons/google-play.svg" alt="broken link github" width="100"></a>
-                </span>
-            </p>
-        </div>
-    </footer>
+                        <a href=""> <img src="assets/icons/google-play.svg" alt="broken link github" width="100"></a>
+                    </span>
+                </p>
+            </div>
+        </footer>
+    </div>
 
     <!-- Page-specific code -->
     <script src="./landing.js"></script>
