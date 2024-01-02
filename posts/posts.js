@@ -175,21 +175,25 @@ function addPostToPage(post, position = 'beforeend') {
                     class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top py-1 mt-3">
                     <li class="nav-item">
                       <!-- add active class when liked -->
-                      <a class="nav-link mb-0" href="#">
-                        <i class="bi bi-heart pe-1"></i>${
-                          post.likes.length ? `Likes (${post.likes.length})` : 'Like'
-                        }</a
+                      <button class="nav-link mb-0 text-black" data-postId="${
+                        post._id
+                      }" onclick="likeHandler(this);">
+                        ${
+                          post.likes.length
+                            ? `<i class="bi bi-heart pe-1 text-danger"></i> ${post.likes.length}`
+                            : '<i class="bi bi-heart pe-1 text-danger"></i>'
+                        }</button
                       >
                     </li>
                     <!-- Card share action menu START -->
                     <li class="nav-item dropdown">
                       <a
                         href="#"
-                        class="nav-link mb-0"
+                        class="nav-link mb-0 text-black"
                         id="cardShareAction4"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
+                        <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share
                       </a>
                       <!-- Card share action dropdown menu -->
                       <ul
@@ -227,7 +231,7 @@ function addPostToPage(post, position = 'beforeend') {
                     </li>
                     <!-- Card share action menu END -->
                     <li class="nav-item">
-                      <a class="nav-link" href="">
+                      <a class="nav-link text-black" href="">
                         <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a
                       >
                     </li>
@@ -246,7 +250,7 @@ function addConnectionsFromCache() {
 
   connectionsContainer.innerHTML = '';
   for (const key of Object.keys(userCache)) {
-    console.log(key);
+    
     //skip person logged in from who to follow
     if (loginData.username == key) continue;
 
@@ -311,6 +315,71 @@ function newPostHandler() {
 
     newPost.value = null;
   });
+}
+
+async function likeHandler(element) {
+  let postId = element.getAttribute('data-postId');
+  console.log('postId: ', postId);
+
+  //get fresh copy of post by id
+  const postResponse = await fetch(`${apiURL}/posts/${postId}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${loginData.token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const postData = await postResponse.json();
+  console.log(postData);
+
+  const postLikes = postData.likes;
+
+  const like = postLikes.find((like) => like.postId == postId);
+
+  console.log(element);
+
+  //if user is in likes array delete like
+  if (postLikes.length != 0 && like.postId == postId) {
+    console.log(like._id);
+
+    let response = await fetch(`${apiURL}/likes/${like._id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${loginData.token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    let data = await response.json();
+    let newLikesCount = Number(element.textContent) - 1;
+
+    if (newLikesCount <= 0)
+      element.innerHTML = `<i class="bi bi-heart pe-1 text-danger"></i>`;
+    else
+      element.innerHTML = `<i class="bi bi-heart pe-1 text-danger"></i> ${newLikesCount}`;
+    console.log(data);
+  } else {
+    let likeCount = Number(element.textContent) + 1;
+    console.log(likeCount);
+
+    let response = await fetch(`${apiURL}/likes`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${loginData.token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ postId }),
+    });
+
+    let data = await response.json();
+
+    element.innerHTML = `<i class="bi bi-heart pe-1 text-danger"></i> ${likeCount}`;
+    console.log(data);
+  }
 }
 
 //on window load
