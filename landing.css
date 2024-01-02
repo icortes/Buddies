@@ -1,8 +1,10 @@
 /* Landing Page CSS */
 
 #login {
-    border: 2px black solid;
+    border: 3px black solid;
     padding: 20px;
+    width: 100%;
+    margin: auto;
 }
 
 
