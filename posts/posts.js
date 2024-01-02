@@ -130,6 +130,14 @@ async function fetchPosts() {
 }
 
 function addPostToPage(post, position = 'beforeend') {
+  const isLiked = post.likes.find((like) => like.username == loginData.username);
+  console.log(isLiked);
+
+  const heart = () => {
+    if (isLiked) return '<i class="bi bi-heart-fill pe-1 text-danger"></i>';
+    return '<i class="bi bi-heart pe-1 text-danger"></i>';
+  };
+
   let postHTML = ` <div class="col-12">
               <!-- Card feed item START -->
               <div class="card h-100">
@@ -180,8 +188,8 @@ function addPostToPage(post, position = 'beforeend') {
                       }" onclick="likeHandler(this);">
                         ${
                           post.likes.length
-                            ? `<i class="bi bi-heart pe-1 text-danger"></i> ${post.likes.length}`
-                            : '<i class="bi bi-heart pe-1 text-danger"></i>'
+                            ? `${heart()} ${post.likes.length}`
+                            : `${heart()}`
                         }</button
                       >
                     </li>
@@ -250,7 +258,6 @@ function addConnectionsFromCache() {
 
   connectionsContainer.innerHTML = '';
   for (const key of Object.keys(userCache)) {
-    
     //skip person logged in from who to follow
     if (loginData.username == key) continue;
 
@@ -377,7 +384,7 @@ async function likeHandler(element) {
 
     let data = await response.json();
 
-    element.innerHTML = `<i class="bi bi-heart pe-1 text-danger"></i> ${likeCount}`;
+    element.innerHTML = `<i class="bi bi-heart-fill pe-1 text-danger"></i> ${likeCount}`;
     console.log(data);
   }
 }
