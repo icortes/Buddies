@@ -20,7 +20,7 @@ function signUpNewUser() {
             //TODO when registering new user, eventually may add more input fields such as bio prompt.
             // "bio": document.getElementById('bio').value,
             "password": document.getElementById('password').value
-            
+
         });
 
         var requestOptions = {
@@ -32,12 +32,18 @@ function signUpNewUser() {
 
         fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users", requestOptions)
             .then(response => response.json())
-              // display alert that new user has been created.
-            .then(result => displayMessage())
-            .catch(error => console.log('error', error));
-
-            function displayMessage(){
-                alert("The new user has been created. You may go to log in page now.");
+            // display alert that new user has been created.
+            .then(result => {
+                console.log(result);
+                if (result.statusCode == 409) {
+                    alert('User already exist. Please choose different username.');
+                }
+                else
+                    window.location.replace('/index.html')
             }
+
+            )
+            .catch(error => console.log('error'));
+
     })
 }
