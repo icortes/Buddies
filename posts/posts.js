@@ -130,12 +130,52 @@ async function fetchPosts() {
 }
 
 function addPostToPage(post, position = 'beforeend') {
+  //heart
   const isLiked = post.likes.find((like) => like.username == loginData.username);
   console.log(isLiked);
 
   const heart = () => {
     if (isLiked) return '<i class="bi bi-heart-fill pe-1 text-danger"></i>';
     return '<i class="bi bi-heart pe-1 text-danger"></i>';
+  };
+
+  //date
+  const postDate = new Date(post.createdAt);
+  console.log('Post Date: ', postDate);
+
+  const nowDate = new Date();
+  console.log('Now: ', nowDate);
+
+  const timestamp = () => {
+    function getDifferenceInDays(date1, date2) {
+      const diffInDays = Math.abs(date2 - date1);
+      return diffInDays / (1000 * 60 * 60 * 24);
+    }
+
+    function getDifferenceInHours(date1, date2) {
+      const diffInHrs = Math.abs(date2 - date1);
+      return diffInHrs / (1000 * 60 * 60);
+    }
+
+    function getDifferenceInMinutes(date1, date2) {
+      const diffInMs = Math.abs(date2 - date1);
+      return diffInMs / (1000 * 60);
+    }
+
+    function getDifferenceInSeconds(date1, date2) {
+      const diffInSecs = Math.abs(date2 - date1);
+      return diffInSecs / 1000;
+    }
+
+    const days = Math.floor(getDifferenceInDays(postDate, nowDate));
+    const hours = Math.floor(getDifferenceInHours(postDate, nowDate));
+    const minutes = Math.floor(getDifferenceInMinutes(postDate, nowDate));
+    const seconds = Math.floor(getDifferenceInSeconds(postDate, nowDate));
+
+    if (days > 0) return days + 'd';
+    else if (hours > 0) return hours + 'hr';
+    else if (minutes > 0) return minutes + 'min';
+    else return seconds + 's';
   };
 
   let postHTML = ` <div class="col-12">
@@ -165,7 +205,7 @@ function addPostToPage(post, position = 'beforeend') {
                               post.username
                             } </span>
                             <span class="nav-item small text-secondary fw-normal"
-                              >• 2hr</span
+                              >• ${timestamp()}</span
                             ></a
                           >
                         </h6>
@@ -180,7 +220,7 @@ function addPostToPage(post, position = 'beforeend') {
 
                   <!-- LIKE SHARE COMMENT -->
                   <ul
-                    class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top py-1 mt-3">
+                    class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top py-1 mt-3 mb-0">
                     <li class="nav-item">
                       <!-- add active class when liked -->
                       <button class="nav-link mb-0 text-black" data-postId="${
@@ -231,17 +271,17 @@ function addPostToPage(post, position = 'beforeend') {
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                           <a class="dropdown-item" href="">
-                            <i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News
-                            Feed</a
-                          >
+                            <i class="bi bi-pencil-square fa-fw pe-2"></i>
+                            Share to News Feed
+                          </a>
                         </li>
                       </ul>
                     </li>
                     <!-- Card share action menu END -->
                     <li class="nav-item">
                       <a class="nav-link text-black" href="">
-                        <i class="bi bi-chat-fill pe-1"></i>Comments (12)</a
-                      >
+                        <i class="bi bi-chat-fill pe-1"></i>Comments (12)
+                      </a>
                     </li>
                   </ul>
                 </div>
