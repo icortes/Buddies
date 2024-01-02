@@ -53,6 +53,7 @@ async function fetchAuthorInformation(post) {
     };
   } else {
     console.log('using fetch for new person:', post.username);
+
     let userPostInfoResponse = await fetch(`${apiURL}/users/${post.username}`, {
       method: 'GET',
       headers: {
@@ -62,11 +63,14 @@ async function fetchAuthorInformation(post) {
       },
     });
 
-    if (!userPostInfoResponse.ok) {
-      throw new Error(`Error fetching user information for ${post.username}`);
-    }
-
     let userPostInfo = await userPostInfoResponse.json();
+    console.log(userPostInfo);
+
+    //if the user is not found/deleted
+    if (!userPostInfoResponse.ok || userPostInfo.status == '404') {
+      //throw new Error(`Error fetching user information for ${post.username}`);
+      return { ...post, fullName: 'Deleted User', bio: '' };
+    }
 
     // Store user information in the cache
     userCache[post.username] = {
@@ -383,12 +387,13 @@ async function likeHandler(element) {
 
   const postLikes = postData.likes;
 
-  const like = postLikes.find((like) => like.postId == postId);
+  const like = postLikes.find((like) => like.username == loginData.username);
 
   console.log(element);
 
   //if user is in likes array delete like
-  if (postLikes.length != 0 && like.postId == postId) {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+  if (postLikes.length != 0 && like?.username == loginData.username) {
     console.log(like._id);
 
     let response = await fetch(`${apiURL}/likes/${like._id}`, {
