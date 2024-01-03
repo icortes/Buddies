@@ -120,7 +120,7 @@ async function getPost() {
 }
 
 //  new post form
-function newPostForm(){
+function newPostForm() {
     display.innerHTML = `
     <div id="edit-user-data" class="container">
          <form id="update-bio-form">
@@ -182,6 +182,39 @@ function displayPost(_data) {
     ${postCard}
     `;
     console.log(_data);
+}
+
+// when liked post button is clicked
+function getLikedPosts() {
+
+    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        redirect: 'follow'
+    }).then(response => response.json())
+        .then(data => {
+            displayLikedPosts(data)
+        })
+        .catch(err => {
+            alert(`error ${err}`)
+        })
+}
+
+// filter through post liked by user
+function displayLikedPosts(_data) {
+    let userLikedPosts = [];
+    _data.forEach(post => {
+        let likes = post.likes;
+        likes.forEach(item => {
+            if (item.username == username) {
+                userLikedPosts.push(post);
+            }
+        })
+    });
+    displayPost(userLikedPosts);
 }
 
 // // display user buddies
