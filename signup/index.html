@@ -24,37 +24,12 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="particles-js"></div>
         <header>
-
-            <!-- nav bar here. -->
-            <nav class="navbar navbar-expand-lg" style="background-image: url(images/main-page/targets.jpg);">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/index.html"><span class="h3">Buddies</span>
-                        <img src="/assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto" id="logo">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav lead">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/signup/index.html"><span class="h4">Sign up</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/index.html"><span class="h4">Sign in</span></a>
-                            </li>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
 
         </header>
 
-        <main>
+        <main class="container" style="height: 100vh;">
 
             <div class="text">
                 <div class="p-3 mb-2 bg-dark text-white text-center h5 title">Buddies - Connecting People</div>
@@ -64,10 +39,9 @@
                 <span class="horizontal two"></span>
             </div>
             <!-- sign in form and website description. -->
-            <div class="container">
                 <div class="row">
                     <!-- Column 1 -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 card border-0 bg-transparent text-white mt-5">
                         <h4>After creating an account you will:</h4>
                         <ul class="h5">
                             <li>Build your community</li>
@@ -81,7 +55,7 @@
 
                     <!-- Column 2 -->
                     <div class="col-sm-6">
-                        <form id="newUserForm">
+                        <form class="card mt-5" id="newUserForm" >
                             <div>
                                 <h4>Sign Up</h4>
                                 <input class="mb-2" type="text" id="username" minlength="3" placeholder="username">
@@ -96,10 +70,10 @@
                             </div>
                             <button id="signUpButton" type="submit">Register</button>
                         </form>
-                        <p>Already a member? <a href="/index.html">Log In</a></p>
+                        <p class="card border-0 bg-transparent d-block my-2 text-white">Already a member? <a href="/index.html">Log In</a></p>
                     </div>
                 </div>
-            </div>
+            
             <!-- sign up section at the bottom -->
         </main>
 
@@ -116,8 +90,10 @@
                 </p>
             </div>
         </footer>
-    </div>
     <!-- Page-specific code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
+        integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./landing.js"></script>
     <script src="signup.js"></script>
 </body>
