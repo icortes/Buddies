@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/assets/icons/icon2.PNG">
+    <!-- import google fonts Roboto. works with css rule in landing css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -25,71 +29,75 @@
 
 <body>
     <div id="particles-js"></div>
-        <header>
+    <header>
 
-        </header>
+    </header>
 
-        <main class="container" style="height: 100vh;">
+    <main class="container" style="height: 100vh;">
 
-            <div class="text">
-                <div class="p-3 mb-2 bg-dark text-white text-center h5 title">Buddies - Connecting People</div>
-                <span class="vertical one"></span>
-                <span class="vertical two"></span>
-                <span class="horizontal one"></span>
-                <span class="horizontal two"></span>
+        <div class="text">
+            <div class="p-3 mb-2 bg-dark text-white text-center h5 title">Buddies - Connecting People</div>
+            <span class="vertical one"></span>
+            <span class="vertical two"></span>
+            <span class="horizontal one"></span>
+            <span class="horizontal two"></span>
+        </div>
+        <!-- sign in form and website description. -->
+        <div class="row justify-content-center">
+            <!-- Column 1 -->
+            <div class="col-sm-6">
+                <form class="card mt-5" id="newUserForm" style="height: 300px;">
+                    <div>
+                        <h4 class="mb-3">Sign Up</h4>
+                        <input class="mb-3" type="text" id="username" minlength="3" placeholder="username">
+                    </div>
+                    <div>
+
+                        <input class="mb-3" type="text" id="fullName" minlength="6" placeholder="full name">
+                    </div>
+                    <div>
+                        <!-- <label for="password">Password</label> -->
+                        <input class="mb-3" type="password" id="password" minlength="6" placeholder="password">
+                    </div>
+                    <button id="signUpButton" type="submit">Register</button>
+                </form>
+                <p class="card border-0 bg-transparent d-block my-2 text-white">Already a member? <a
+                        href="/index.html">Log In</a></p>
             </div>
-            <!-- sign in form and website description. -->
-                <div class="row">
-                    <!-- Column 1 -->
-                    <div class="col-sm-6 card border-0 bg-transparent text-white mt-5">
-                        <h4>After creating an account you will:</h4>
-                        <ul class="h5">
-                            <li>Build your community</li>
-                            <li>Discuss latest events</li>
-                            <li>Meet new people</li>
-                            <li>And much more!</li>
-                        </ul>
-                        <!-- <h4>Use it on the go</h4>
+        </div>
+        
+        <div class="row justify-content-center">
+            <!-- Column 2 -->
+            <div class="col-sm-6 card border-0 bg-transparent text-white mt-5">
+                <h4>After creating an account you will:</h4>
+                <ul class="h5">
+                    <li>Build your community</li>
+                    <li>Discuss latest events</li>
+                    <li>Meet new people</li>
+                    <li>And much more!</li>
+                </ul>
+                <!-- <h4>Use it on the go</h4>
                     <img src="Images/Carousel/caro6.PNG" alt="" srcset="" width="200"> -->
-                    </div>
-
-                    <!-- Column 2 -->
-                    <div class="col-sm-6">
-                        <form class="card mt-5" id="newUserForm" >
-                            <div>
-                                <h4>Sign Up</h4>
-                                <input class="mb-2" type="text" id="username" minlength="3" placeholder="username">
-                            </div>
-                            <div>
-                                
-                                <input class="mb-2" type="text" id="fullName" minlength="6" placeholder="full name">
-                            </div>
-                            <div>
-                                <!-- <label for="password">Password</label> -->
-                                <input class="mb-2" type="password" id="password" minlength="6" placeholder="password">
-                            </div>
-                            <button id="signUpButton" type="submit">Register</button>
-                        </form>
-                        <p class="card border-0 bg-transparent d-block my-2 text-white">Already a member? <a href="/index.html">Log In</a></p>
-                    </div>
-                </div>
-            
-            <!-- sign up section at the bottom -->
-        </main>
-
-        <!-- Footer-->
-        <footer>
-            <div class="footer">
-                <p>&copy; 2023 Buddies. All Rights Reserved.
-
-                    <span class="icons">
-                        <a href=""> <img src="/assets/icons/app-store.svg" alt="broken link linkedIn" width="100"></a>
-
-                        <a href=""> <img src="/assets/icons/google-play.svg" alt="broken link github" width="100"></a>
-                    </span>
-                </p>
             </div>
-        </footer>
+        </div>
+       
+
+        <!-- sign up section at the bottom -->
+    </main>
+
+    <!-- Footer-->
+    <footer>
+        <div class="footer">
+            <p>&copy; 2023 Buddies. All Rights Reserved.
+
+                <span class="icons">
+                    <a href=""> <img src="/assets/icons/app-store.svg" alt="broken link linkedIn" width="100"></a>
+
+                    <a href=""> <img src="/assets/icons/google-play.svg" alt="broken link github" width="100"></a>
+                </span>
+            </p>
+        </div>
+    </footer>
     <!-- Page-specific code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
         integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
