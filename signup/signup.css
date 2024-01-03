@@ -12,7 +12,18 @@
 }
 
 body {
-    background-image: url(/assets/images/moreImages/img6.jpg);
+    /* background-image: url(/assets/images/moreImages/img6.jpg); */
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #453481;
+    /* background-image: url(""); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
 }
 
 /* styling for footer */
@@ -20,7 +31,7 @@ body {
     /* background-color: rgb(138, 219, 180); */
     /* background-color: paleturquoise; */
     background-color: rgb(84, 72, 93);
-    position: sticky; 
+    /* position: sticky; */
     bottom: 0;
     width: 100%;
     padding: 10px;
@@ -51,7 +62,7 @@ body {
 
 .text span{
     position: absolute;
-    background-color: #453481;
+    background-color: #D1B000;
     transition: 0.5s;
 }
 

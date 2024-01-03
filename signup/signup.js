@@ -1,4 +1,10 @@
 "use strict"
+
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+particlesJS.load('particles-js', '/particlesjs-config.json', function () {
+    console.log('callback - particles.js config loaded');
+});
+
 // submit event to register new user.
 document.getElementById('newUserForm').addEventListener('submit', signUpNewUser());
 
