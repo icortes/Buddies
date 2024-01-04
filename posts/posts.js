@@ -213,7 +213,7 @@ function addPostToPage(post, position = 'beforeend') {
                           </a>
                         </h6>
                       </div>
-                      <p class="mb-0 small text-truncate" style="max-width: 550px">${
+                      <p class="mb-0 small text-truncate" style="max-width: 30vw">${
                         post.bio
                       }</p>
                     </div>
