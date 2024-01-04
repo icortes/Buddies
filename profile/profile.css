@@ -1,7 +1,11 @@
 body {
     /* background: url(/assets/images/sf-filler-img.jpeg);
     background-size: cover; */
-    background-color: aliceblue;
+    background-color: #E9ECEF;
+}
+a {
+    text-decoration: none;
+    color: #fff;
 }
 
 #user-profile-container {
