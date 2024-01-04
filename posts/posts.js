@@ -43,14 +43,15 @@ async function fetchUserInfo() {
  * @returns post with name of the author and bio
  */
 async function fetchAuthorInformation(post) {
+  // If user information is in the cache, use it directly
   if (userCache[post.username]) {
     console.log('using cache for:', post.username);
-    // If user information is in the cache, use it directly
     return {
       ...post,
       fullName: userCache[post.username].fullName,
       bio: userCache[post.username].bio,
     };
+    //fetch user information if not found in cache
   } else {
     console.log('using fetch for new person:', post.username);
 
