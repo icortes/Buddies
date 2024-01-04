@@ -1,4 +1,4 @@
-# MicroblogNetwork A Team Project
+# Buddies - A Team Project
 
 ## Introduction
 The Microblog Network project called **Buddies** focuses on building a website that lets users share posts and insights stories with other users.
@@ -9,6 +9,9 @@ The Microblog Network project called **Buddies** focuses on building a website t
 * [Bootstrap 5](https://getbootstrap.com/)
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Figma](https://www.figma.com/)
+* [Particles.js](https://vincentgarreau.com/particles.js/)
+* [Free AI Logo Maker](https://looka.com/logo-maker/)
+
 
 ## Page Descriptions and Sample Screenshots
 
@@ -20,7 +23,6 @@ Here is the sample image of the landing page:
 Here is the sample image of the sign-up page:
 ![Sign-up page]()
 
-
 ### 3. posts/index.html
 Here is the sample image of the post page:
 ![Posts page]()
@@ -31,11 +33,6 @@ Here is the sample image of the profile page:
 
 ### 5. One interesting piece of JavaScript:
 
-
-### 6. css pages.
-
-
-### 7. js pages.
 
 
 ## 🚀 Deployed Link
@@ -55,3 +52,6 @@ Here is the sample image of the profile page:
 - [Link to Github](https://github.com/PavloSernetskyi)
 - [Link to LinkedIn](https://www.linkedin.com/in/pavlo-sernetskyi)
 
+## Acknowledgments
+- [Animated Profile Card](https://www.youtube.com/watch?v=b2jVm6EAJt0)
+- [Remsey](https://www.linkedin.com/in/remseymailjard/)
