@@ -29,7 +29,7 @@ Here is the sample image of the post page:
 Here is the sample image of the profile page:
 ![Profile page]()
 
-### 5. Special Feature:
+### 5. One interesting piece of JavaScript:
 
 
 ### 6. css pages.
@@ -39,7 +39,7 @@ Here is the sample image of the profile page:
 
 
 ## 🚀 Deployed Link
-* [Visit Live Site]()
+* [Visit Live Site](https://buddies.isaaccortes.com/)
 
 ## Authors
 
