@@ -46,7 +46,7 @@
         <div class="row justify-content-center">
             <!-- Column 1 -->
             <div class="col-sm-6">
-                <form class="card mt-5" id="newUserForm" style="height: 400px;">
+                <form class="card mt-5" id="newUserForm" style="height: 450px;">
                     <h4 class="mb-3">Sign Up</h4>
                     <!-- full name -->
                     <div>
@@ -59,6 +59,10 @@
                     <!--password  -->
                     <div>
                         <input class="mb-3 form-control" type="password" id="password" minlength="6" maxlength="20" placeholder="password" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" onclick="showPassword()"/>
+                        <label class="form-check-label" for=""> Show Password </label>
                     </div>
                     <!-- bio text area. -->
                     <textarea class="form-control" id="bio" rows="4" cols="30" placeholder="Introduce yourself min 20 & max 150 characters."
@@ -109,6 +113,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="./landing.js"></script> -->
     <script src="signup.js"></script>
+
+    <!-- landing page connected here so sign up page can use showPassword() function that is written in landing.js -->
+    <script src="/landing.js"></script>
 </body>
 
 </html>
