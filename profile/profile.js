@@ -5,12 +5,16 @@ function init(event) {
     document.getElementById('title').innerText = `${username}'s Profile (test)`;
     getUserData(username);
     // greetUser(username);
+    console.log(userBuddies);
+    console.log(buddyRequestIds);
 }
 const username = JSON.parse(localStorage.getItem('login-data')).username;
 const display = document.getElementById("user-display");
 const editForm = document.getElementById("edit-user-data");
 const token = JSON.parse(window.localStorage.getItem("login-data")).token;
+let buddyRequestIds = [];
 let userBuddies = [];
+let buddyPost;
 
 // function to get user data
 async function getUserData(endpointResource) {
@@ -215,7 +219,7 @@ function displayPost(_data) {
                 <!-- add active class when liked -->
                 <button class="nav-link mb-0 text-black" data-postId="${
                   post._id
-                }" onclick="likeHandler(this);">
+                }" onclick="likeHandler(this);"><img class="bi bi-heart-fill pe-1 text-danger"></img>
                   ${post.likes.length}</button>
               </li>
               <!-- Card share action menu START -->
@@ -316,6 +320,7 @@ function displayLikedPosts(_data) {
     displayPost(userLikedPosts);
 }
 
+// may not need this function
 // get all users function
 async function getAllUsers() {
     const baseUrl = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/users";
@@ -346,8 +351,8 @@ async function getAllUsers() {
 }
 
 // get buddy post function 
-function addBuddy(){
-    const postText = `${username}`;
+function requestBuddy(){
+    const postText = `@testUser123 #sdfgh`;
     const myNewPost = {
         text: postText
     };
@@ -364,12 +369,63 @@ function addBuddy(){
     }).then(response => response.json())
         .then(data => {
             console.log(data);
-            display.innerHTML = `Posted!`;
+            display.innerHTML = `Request Posted!`;
+            buddyPost = data._id;
+            // once request has been created, save id to local storage
+
+            // use buddypost to fetch that post
+            // saveRequest(buddyPost);
+           
         })
         .catch(err => {
             alert(`error ${err}`)
         });
 }
+
+// save buddy requestIds?
+function saveRequest(requestId){
+
+}
+
+// get buddy post 
+async function getAddBuddyPost(postId){
+    const baseUrl = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/";
+    const headers = {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+
+    if (!baseUrl) {
+        console.error(`User has not logged in`);
+        return;
+    }
+    try {
+        const response = await fetch(baseUrl + postId, {
+            method: 'GET',
+            headers: headers
+        });
+        if (!response.ok) {
+            throw new Error(`Network response was not okay`);
+        }
+        const data = await response.json()
+        // create variable to save requested username
+        // replace with another function to filter likes
+        console.log(data);
+
+    } catch (error) {
+        console.error(`There was a problem with the fetch operation`, error)
+    }
+}
+
+// function to add buddy to buddy list
+function addToBuddyList(likesArray){
+    for(index = 0; index < likesArray.length; index++) {
+        if(likesArray[index].username == 'testUser123') {
+            userBuddies.push('testUser123');
+        }
+    }
+}
+// filter through 
 // // display user buddies
 // function displayBuddies() {
 
