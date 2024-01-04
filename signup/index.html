@@ -46,26 +46,31 @@
         <div class="row justify-content-center">
             <!-- Column 1 -->
             <div class="col-sm-6">
-                <form class="card mt-5" id="newUserForm" style="height: 300px;">
+                <form class="card mt-5" id="newUserForm" style="height: 400px;">
+                    <h4 class="mb-3">Sign Up</h4>
+                    <!-- full name -->
                     <div>
-                        <h4 class="mb-3">Sign Up</h4>
-                        <input class="mb-3" type="text" id="username" minlength="3" placeholder="username">
+                        <input class="mb-3 form-control" type="text" id="fullName" minlength="6" placeholder="full name" required>
                     </div>
+                    <!-- username -->
                     <div>
-
-                        <input class="mb-3" type="text" id="fullName" minlength="6" placeholder="full name">
+                        <input class="mb-3 form-control" type="text" id="username" minlength="3" placeholder="username" required>
                     </div>
+                    <!--password  -->
                     <div>
-                        <!-- <label for="password">Password</label> -->
-                        <input class="mb-3" type="password" id="password" minlength="6" placeholder="password">
+                        <input class="mb-3 form-control" type="password" id="password" minlength="6" placeholder="password" required>
                     </div>
-                    <button id="signUpButton" type="submit">Register</button>
+                    <!-- bio text area. -->
+                    <textarea class="form-control" id="bio" rows="4" cols="30" placeholder="Introduce yourself min 20 & max 150 characters."
+                        minlength="20" maxlength="150" required></textarea>
+                    <br>
+                    <button class="btn btn-secondary" id="signUpButton" type="submit">Register</button>
                 </form>
                 <p class="card border-0 bg-transparent d-block my-2 text-white">Already a member? <a
                         href="/index.html">Log In</a></p>
             </div>
         </div>
-        
+
         <div class="row justify-content-center">
             <!-- Column 2 -->
             <div class="col-sm-6 card border-0 bg-transparent text-white mt-5">
@@ -80,7 +85,7 @@
                     <img src="Images/Carousel/caro6.PNG" alt="" srcset="" width="200"> -->
             </div>
         </div>
-       
+
 
         <!-- sign up section at the bottom -->
     </main>
@@ -102,7 +107,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
         integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./landing.js"></script>
+    <!-- <script src="./landing.js"></script> -->
     <script src="signup.js"></script>
 </body>
 
