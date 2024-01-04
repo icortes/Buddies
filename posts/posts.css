@@ -7,3 +7,12 @@ a {
 a:hover {
   color: purple;
 }
+
+body {
+  background-color: #E9ECEF;
+}
+
+.user-card {
+    background-color: #C3BEC4;
+    border-color: purple;
+}

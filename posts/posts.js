@@ -4,7 +4,7 @@
 
 let loginData = getLoginData();
 let apiURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/api';
-let postsLimit = 10;
+let postsLimit = 25;
 let postsOffset = 0;
 
 let postsContainer = document.getElementById('postsContainer');
@@ -101,6 +101,7 @@ async function sequentiallyResolvePosts(posts) {
 }
 
 async function fetchPosts() {
+  console.log(postsOffset);
   // fetch for posts
   let postsResponse = await fetch(
     `${apiURL}/posts?limit=${postsLimit},offset=${postsOffset}`,
@@ -111,13 +112,12 @@ async function fetchPosts() {
         Authorization: `Bearer ${loginData.token}`,
         'Content-Type': 'application/json',
       },
+      cache: 'reload',
     }
   );
 
   let posts = await postsResponse.json();
   console.log(posts);
-
-  let postsContainer = document.getElementById('postsContainer');
 
   sequentiallyResolvePosts(posts).then((resolvedPosts) => {
     console.log(resolvedPosts);
@@ -136,7 +136,7 @@ async function fetchPosts() {
 function addPostToPage(post, position = 'beforeend') {
   //heart
   const isLiked = post.likes.find((like) => like.username == loginData.username);
-  console.log(isLiked);
+  //console.log(isLiked);
 
   const heart = () => {
     if (isLiked) return '<i class="bi bi-heart-fill pe-1 text-danger"></i>';
@@ -145,10 +145,10 @@ function addPostToPage(post, position = 'beforeend') {
 
   //date
   const postDate = new Date(post.createdAt);
-  console.log('Post Date: ', postDate);
+  //console.log('Post Date: ', postDate);
 
   const nowDate = new Date();
-  console.log('Now: ', nowDate);
+  //console.log('Now: ', nowDate);
 
   const timestamp = () => {
     function getDifferenceInDays(date1, date2) {
@@ -184,7 +184,7 @@ function addPostToPage(post, position = 'beforeend') {
 
   let postHTML = ` <div class="col-12">
               <!-- Card feed item START -->
-              <div class="card h-100">
+              <div class="card h-100 user-card">
                 <!-- Card body START -->
                 <div class="card-body">
                   <!-- Post User -->
@@ -432,6 +432,12 @@ async function likeHandler(element) {
     element.innerHTML = `<i class="bi bi-heart-fill pe-1 text-danger"></i> ${likeCount}`;
     console.log(data);
   }
+}
+
+async function loadMorePosts() {
+  postsOffset += postsLimit;
+  console.log(postsOffset);
+  await fetchPosts();
 }
 
 //on window load
