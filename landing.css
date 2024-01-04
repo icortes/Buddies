@@ -1,5 +1,8 @@
 /* Landing Page CSS */
 
+body {
+    background-color: #453481;
+}
 #login {
     border: 3px black solid;
     padding: 20px;
@@ -55,6 +58,7 @@ nav {
     position: absolute;
     width: 100%;
     height: 100%;
+    
     background-color: #453481;
     /* background-image: url(""); */
     background-repeat: no-repeat;
