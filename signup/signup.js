@@ -23,10 +23,8 @@ function signUpNewUser() {
             //getting input from sign up form fields.
             "username": document.getElementById('username').value,
             "fullName": document.getElementById('fullName').value,
-            //TODO when registering new user, eventually may add more input fields such as bio prompt.
-            // "bio": document.getElementById('bio').value,
+            "bio": document.getElementById('bio').value,
             "password": document.getElementById('password').value
-
         });
 
         var requestOptions = {
