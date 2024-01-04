@@ -17,15 +17,15 @@ The Microblog Network project called **Buddies** focuses on building a website t
 
 ### 1. index.html
 Here is the sample image of the landing page:
-![Sign-in page]()
+![Sign-in page](/assets/readme/landing-sample.PNG)
 
 ### 2. signup/index.html
 Here is the sample image of the sign-up page:
-![Sign-up page]()
+![Sign-up page](/assets/readme/sign-up-sample.PNG)
 
 ### 3. posts/index.html
 Here is the sample image of the post page:
-![Posts page]()
+![Posts page](/assets/readme/posts-sample.PNG)
 
 ### 4. profile/index.html
 Here is the sample image of the profile page:
