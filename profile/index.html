@@ -266,8 +266,25 @@
                     </div>
                 </div>
                 <div class="boxes m-5" id="buddies">
-                    <button onclick="requestBuddy()">buddies</button>
+                    <ul id="buddies-list">
+                        <li>buddy</li>
+                    </ul>
                 </div>
+                <div class="boxes m-5" id="add-buddies">
+                    <!-- other users cards (not friends) -->
+                    <div class="card">
+                        <!-- username -->
+                        <h5 class="card-header">heyNewUser123</h5>
+                        <div class="card-body">
+                          <h5 class="card-title"></h5>
+                          <p class="card-text"></p>
+                          <button class="btn btn-primary" id="request-buddy-btn" onclick="requestBuddy('heyNewUser123')">Add Buddy</button>
+                         
+                        </div>
+                      </div>
+                    
+                </div>
+
             </div>
         </div>
     </main>
