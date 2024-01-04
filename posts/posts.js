@@ -4,14 +4,14 @@
 
 let loginData = getLoginData();
 let apiURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/api';
-let postsLimit = 25;
+let postsLimit = 20;
 let postsOffset = 0;
 
 let postsContainer = document.getElementById('postsContainer');
 let spinner = document.getElementById('spinner');
 
 // cache to store user name and bio from the posts
-const userCache = {};
+let userCache = {};
 
 /**
  * Fetch user information for the left sidebar.
@@ -177,8 +177,8 @@ function addPostToPage(post, position = 'beforeend') {
     const seconds = Math.floor(getDifferenceInSeconds(postDate, nowDate));
 
     if (days > 0) return days + 'd';
-    else if (hours > 0) return hours + 'hr';
-    else if (minutes > 0) return minutes + 'min';
+    else if (hours > 0) return hours + ' hr';
+    else if (minutes > 0) return minutes + ' min';
     else return seconds + 's';
   };
 
@@ -208,17 +208,18 @@ function addPostToPage(post, position = 'beforeend') {
                             <span class="nav-item small fw-normal"> @${
                               post.username
                             } </span>
-                            <span class="nav-item small text-secondary fw-normal"
-                              >• ${timestamp()}</span
-                            ></a
-                          >
+                            <span class="nav-item small text-black-50 fw-normal"
+                              > • ${timestamp()} ago</span> 
+                          </a>
                         </h6>
                       </div>
-                      <p class="mb-0 small">${post.bio}</p>
+                      <p class="mb-0 small text-truncate" style="max-width: 550px">${
+                        post.bio
+                      }</p>
                     </div>
                   </div>
                   <!-- Info -->
-                  <p class="text-body"
+                  <p class="card card-body border-0 post-content"
                     >${post.text}</p
                   >
 
@@ -305,9 +306,9 @@ function addConnectionsFromCache() {
     //skip person logged in from who to follow
     if (loginData.username == key) continue;
 
-    let connectionHtml = `<div class="hstack gap-2 mb-3">
+    let connectionHtml = `<div class="hstack gap-2 mb-3 rounded connection">
 
-                    <div class="avatar">
+                    <div class="avatar ms-2">
                       <a href="#"
                         ><img class="avatar-img rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" width="48px"
                       /></a>
