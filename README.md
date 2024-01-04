@@ -103,12 +103,12 @@ Finally, it returns a new `post` object with `fullName` and `bio` added from the
 - [Link to LinkedIn](https://www.linkedin.com/in/pavlo-sernetskyi)
 
  **Mia McClure** 
-- [Link to Github](https://github.com/PavloSernetskyi)
-- [Link to LinkedIn](https://www.linkedin.com/in/pavlo-sernetskyi)
+- [Link to Github](https://github.com/MiaMcClure)
+- [Link to LinkedIn](https://www.linkedin.com/in/mia-mcclure-7b6a91267/)
 
  **Isaac Cortez Hernandez** 
-- [Link to Github](https://github.com/PavloSernetskyi)
-- [Link to LinkedIn](https://www.linkedin.com/in/pavlo-sernetskyi)
+- [Link to Github](https://github.com/icortes)
+- [Link to LinkedIn](https://www.linkedin.com/in/cortes-isaac/)
 
 ## Acknowledgments
 - [Animated Profile Card](https://www.youtube.com/watch?v=b2jVm6EAJt0)
