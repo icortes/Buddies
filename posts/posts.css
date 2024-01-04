@@ -21,6 +21,11 @@ button {
     pointer !important;
 }
 
+textarea {
+  cursor: url(https://cdn.custom-cursor.com/db/13077/32/cute-cats-in-frogs-hat-pointer.png),
+    pointer !important;
+}
+
 a:hover {
   color: purple;
 }
