@@ -40,9 +40,16 @@ function login(loginData) {
   return fetch(apiBaseURL + '/auth/login', options)
     .then((response) => response.json())
     .then((loginData) => {
-      window.localStorage.setItem('login-data', JSON.stringify(loginData));
-      window.location.assign('/posts'); // redirect
-
+      // window.localStorage.setItem('login-data', JSON.stringify(loginData));
+      // window.location.assign('/posts'); // redirect
+      console.log(loginData);
+      if (loginData.statusCode == 400) {
+        alert(loginData.message);
+      }
+      else {
+        window.localStorage.setItem('login-data', JSON.stringify(loginData));
+        window.location.assign('/posts'); // redirect
+      }
       return loginData;
     });
 }
