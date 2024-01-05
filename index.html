@@ -85,7 +85,7 @@
                         <h4 class="mb-3"><img src="assets/icons/biggerLogo.PNG" alt="" width="100px" height="auto"
                                 id="logo"> Sign in
                         </h4>
-                        <input class="mb-3 form-control" type="text" id="username" minlength="3" maxlength="20" placeholder="username">
+                        <input class="mb-3 form-control" type="text" id="username" minlength="3" maxlength="20" placeholder="username" autocomplete="username">
                     </div>
 
                     <div class="mb-2">
@@ -94,12 +94,12 @@
                         <br class="mb-1">
                     </div>        
                     <div class="form-check mb-1">
-                        <input class="form-check-input" type="checkbox" value="" id=""/>
-                        <label class="form-check-label" for=""> Remember me </label>
+                        <input class="form-check-input" type="checkbox" id="remember-me"/>
+                        <label class="form-check-label" for="remember-me"> Remember me </label>
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" onclick="showPassword()"/>
-                        <label class="form-check-label" for=""> Show Password </label>
+                        <input class="form-check-input" type="checkbox" id="show-pswd" onclick="showPassword()"/>
+                        <label class="form-check-label" for="show-pswd"> Show Password </label>
                     </div>
                     <button class="btn btn-secondary" id="loginButton" type="submit">Sign in</button>
                 </form>

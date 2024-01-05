@@ -54,19 +54,19 @@
                     </div>
                     <!-- username -->
                     <div>
-                        <input class="mb-3 form-control" type="text" id="username" minlength="3" maxlength="20" placeholder="username" required>
+                        <input class="mb-3 form-control" type="text" id="username" minlength="3" maxlength="20" placeholder="username" required autocomplete="username">
                     </div>
                     <!--password  -->
                     <div>
                         <input class="mb-3 form-control" type="password" id="password" minlength="6" maxlength="20" placeholder="password" required>
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" onclick="showPassword()"/>
-                        <label class="form-check-label" for=""> Show Password </label>
+                        <input class="form-check-input" type="checkbox" value="" id="show-password" onclick="showPassword()"/>
+                        <label class="form-check-label" for="password"> Show Password </label>
                     </div>
                     <!-- bio text area. -->
-                    <textarea class="form-control" id="bio" rows="4" cols="30" placeholder="Introduce yourself min 20 & max 150 characters."
-                        minlength="20" maxlength="150" required></textarea>
+                    <textarea class="form-control" id="bio" rows="4" cols="30" placeholder="Introduce yourself min 1 & max 150 characters."
+                        minlength="1" maxlength="150" required></textarea>
                     <br>
                     <button class="btn btn-secondary" id="signUpButton" type="submit">Register</button>
                 </form>
@@ -113,9 +113,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="./landing.js"></script> -->
     <script src="signup.js"></script>
-
-    <!-- landing page connected here so sign up page can use showPassword() function that is written in landing.js -->
-    <script src="/landing.js"></script>
 </body>
 
 </html>
