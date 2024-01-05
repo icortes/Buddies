@@ -52,3 +52,13 @@ function signUpNewUser() {
     })
 }
 
+function showPassword(){
+    // grab password to make it visible when user checks the box.
+    let password = document.getElementById('password');
+    if(password.type === "password"){
+        password.type = "text";
+    }
+    else{
+        password.type = "password";
+    }
+}
