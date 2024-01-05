@@ -12,6 +12,7 @@ window.onload = async function () {
     // const buddies = await findRequests();
     console.log(userBuddies);
     displayBuddies(userBuddies);
+    addWhoToFollow()
 }
 const username = JSON.parse(localStorage.getItem('login-data')).username;
 const display = document.getElementById("user-display");
