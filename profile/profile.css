@@ -2,6 +2,7 @@ body {
     /* background: url(/assets/images/sf-filler-img.jpeg);
     background-size: cover; */
     background-color: #E9ECEF;
+    transition: background-color 0.5s ease;
 }
 a {
     text-decoration: none;
@@ -41,6 +42,15 @@ a {
 }
 
 #edit-img {
+    max-width: 20px;
+}
+#mood {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    font-size: small;
+}
+#mood-img {
     max-width: 20px;
 }
 #bestie-title {
@@ -83,6 +93,7 @@ a {
     align-items: center;
     flex-wrap: wrap;
     padding-bottom: 20px;
+    overflow: hidden;
 }
 
 
@@ -91,14 +102,15 @@ a {
 /* other users profile cards */
 .profile-card {
     position: relative;
-    width: 350px;
-    height: 190px;
+    width: 50%;
+    /* height: 190px; */
+    aspect-ratio: 1 / 1;
     background: #fff;
     transition: 0.5s;
 }
 
 .profile-card:hover {
-    height: 450px;
+    height: 350px;
 }
 
 .profile-card .lines {
@@ -139,11 +151,12 @@ a {
 
 .profile-card .imgBx {
     position: absolute;
-    top: -50px;
+    top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 150px;
-    height: 150px;
+    width: 45%;
+    /* height: 150px; */
+    aspect-ratio: 1 / 1;
     background: #000;
     transition: 0.5s;
     z-index: 10;
@@ -152,8 +165,9 @@ a {
 }
 
 .profile-card:hover .imgBx {
-    width: 250px;
-    height: 250px;
+    width: 55%;
+    /* height: 250px; */
+    aspect-ratio: 1 / 1;
 }
 
 .profile-card .imgBx::before {
@@ -257,3 +271,4 @@ a {
 .profile-card .content .details .actionBtn button:nth-child(1) {
     background: #CE64F3;
 }
+

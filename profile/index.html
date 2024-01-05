@@ -8,9 +8,7 @@
     <!-- bootstrap v5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
     <!-- my stylesheet -->
     <link rel="stylesheet" href="profile.css">
     <style>
@@ -85,6 +83,10 @@
                                             <img id="edit-img" src="/assets/icons/edit.png" alt="edit">
                                             <p>edit profile</p>
                                         </button>
+                                        <button id="mood" onclick="setMoodSelection()">
+                                            <img id="mood-img" src="/assets/icons/emoticons.png" alt="mood">
+                                            <p>set mood</p>
+                                        </button>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-lg mt-n5 mb-3">
                                             <a href="#!"><img class="avatar-img rounded border border-white border-3"
@@ -96,7 +98,7 @@
                                         <p id="userName"></p>
                                         <p id="bio"></p>
                                         <p class="mt-3" id="userBio"></p>
-                                        
+
 
                                         <!-- User stat START -->
                                         <div class="overlay">
@@ -132,47 +134,40 @@
                                     <!-- Side Nav START -->
                                     <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="/"> <img class="nav-img"
-                                                    src="/assets/icons/home-icon.png"
-                                                    alt="home-icon"><span>Feed</span></a>
+                                          <a class="nav-link text-dark" href="/"> 🏠 <span>Feed</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""><img class="nav-img"
-                                                    src="/assets/icons/link-icon.png" alt="connect"> <span>Connections
-                                                </span></a>
+                                          <a class="nav-link text-dark" href="">
+                                            🔗 <span>Connections </span></a
+                                          >
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> <img class="nav-img"
-                                                    src="/assets/icons/newspaper-folded.png" alt="news"> <span>Latest
-                                                    News </span></a>
+                                          <a class="nav-link text-dark" href="">
+                                            🌎 <span>Latest News </span></a
+                                          >
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> <img class="nav-img"
-                                                    src="/assets/icons/calendar.png" alt="events"> <span>Events
-                                                </span></a>
+                                          <a class="nav-link text-dark" href=""> 🗓️ <span>Events </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> <img class="nav-img"
-                                                    src="/assets/icons/group-chat.png" alt="groups"> <span>Groups
-                                                </span></a>
+                                          <a class="nav-link text-dark" href=""> 💬 <span>Groups </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> <img class="nav-img"
-                                                    src="/assets/icons/ringing.png" alt="notifications">
-                                                <span>Notifications </span></a>
+                                          <a class="nav-link text-dark" href="">
+                                            🔔 <span>Notifications </span></a
+                                          >
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> <img class="nav-img"
-                                                    src="/assets/icons/settings.png" alt="settings"> <span>Settings
-                                                </span></a>
+                                          <a class="nav-link text-dark" href="">
+                                            ⚙️ <span>Settings </span></a
+                                          >
                                         </li>
                                         <li class="nav-item">
-                                            <button class="nav-link text-dark" onclick="logout();">
-                                                <img class="nav-img" src="/assets/icons/log-out.png" alt="logout">
-                                                <span>Log Out </span>
-                                            </button>
+                                          <button class="nav-link text-dark" onclick="logout();">
+                                            🔚 <span>Log Out </span>
+                                          </button>
                                         </li>
-                                    </ul>
+                                      </ul>
                                     <!-- Side Nav END -->
                                 </div>
                                 <!-- Card body END -->
@@ -232,10 +227,10 @@
                             <button class="change-display-btn nav-link">Groups</button>
                         </li>
                     </ul>
-
                 </div>
                 <div id="user-display">
                     <!-- use Javascript to fill -->
+
                 </div>
 
             </div>
@@ -243,11 +238,12 @@
             <div class="col-12 col-lg-3" id="right-side">
                 <div class="boxes m-5" id="best-buddy">
                     <!-- best buddy's profile card -->
-                    <h2 id="bestie-title">Best Buddy</h2>
+                    <h2 id="bestie-title"></h2>
                     <div class="profile-card">
                         <div class="lines"></div>
                         <div class="imgBx">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                                alt="">
                         </div>
                         <div class="content">
                             <div class="details">
@@ -266,23 +262,37 @@
                     </div>
                 </div>
                 <div class="boxes m-5" id="buddies">
-                    <ul id="buddies-list">
-                        <li>buddy</li>
-                    </ul>
+
                 </div>
+                <!-- testing -->
+                <!-- <div>
+                    <audio controls>
+                        <source src="https://p.scdn.co/mp3-preview/8c53920b5fd2c3178afa36cac9eec68b5ee9204a?cid=0c9ac5702fa8405b86233ba19cb49436" type="audio/mp3">
+                        Your browser does not support the audio element.
+                      </audio>
+                      <div>
+                        <form action="submit" id="like-track-form">
+                            <label for="liked-track"></label>
+                            <input type="text" name="" id="liked-track">
+                            <button class="btn btn-primary" type="submit">add</button>
+                        </form>
+                      </div>
+                </div> -->
+
                 <div class="boxes m-5" id="add-buddies">
                     <!-- other users cards (not friends) -->
                     <div class="card">
                         <!-- username -->
-                        <h5 class="card-header">heyNewUser123</h5>
+                        <h5 class="card-header">isaac</h5>
                         <div class="card-body">
-                          <h5 class="card-title"></h5>
-                          <p class="card-text"></p>
-                          <button class="btn btn-primary" id="request-buddy-btn" onclick="requestBuddy('heyNewUser123')">Add Buddy</button>
-                         
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <button class="btn btn-primary" id="request-buddy-btn" onclick="requestBuddy('isaac')">Add
+                                Buddy</button>
+
                         </div>
-                      </div>
-                    
+                    </div>
+
                 </div>
 
             </div>

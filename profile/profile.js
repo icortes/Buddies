@@ -1,30 +1,57 @@
 "use strict";
-window.onload = init;
-function init(event) {
-    event.preventDefault();
+window.onload = async function () {
+
     document.getElementById('title').innerText = `${username}'s Profile`;
-
-  
-
-
-    
+    // const moodBtn = document.getElementById('change-mood-btn');
+    // const selectMood = document.getElementById('mood-selection');
+    // moodBtn.addEventListener('click', () => {
+    //     const selectedMood = selectMood.value;
+    //     setMood(selectedMood);
+    // })
     getUserData(username);
-    findRequests();
-
+    // const buddies = await findRequests();
     console.log(userBuddies);
-   
+    displayBuddies(userBuddies);
 }
 const username = JSON.parse(localStorage.getItem('login-data')).username;
 const display = document.getElementById("user-display");
 const editForm = document.getElementById("edit-user-data");
 const token = JSON.parse(window.localStorage.getItem("login-data")).token;
-let userBuddies = [];
+let userBuddies = ['Mia',];
 
 // turn into animation 
 // function greetUser(user) {
 //     document.getElementById("greeting").innerText = `Welcome ${user}`;
 // }
+// add mood change 
+function setMoodSelection() {
+    display.innerHTML = `
+    <label for="mood-selection">I'm feeling...</label>
+    <form id="mood-form" class="input-group">
+        <select name="select-mood" id="mood-selection" class="form-control">
+            <option value="none">none</option>
+            <option value="happy">Happy</option>
+            <option value="gloomy">Gloomy</option>
+            <option value="romantic">Romantic</option>
+        </select>
+        <button id="change-mood-btn" class="btn btn-primary" type="button">Change Mood</button>
+    </form>
+    `;
+}
 
+// change background color
+function setMood(_selectedMood) {
+    const body = document.body;
+    if (_selectedMood === 'happy') {
+        body.style.backgroundColor = 'yellow';
+    } else if (_selectedMood === 'gloomy') {
+        body.style.backgroundColor = 'darkgray'; // Change to the desired color for gloomy mood
+    } else if (_selectedMood === 'romantic') {
+        body.style.backgroundColor = 'pink'; // Change to the desired color for romantic mood
+    } else {
+        body.style.backgroundColor = ''; // Reset to default color if the mood is not recognized
+    }
+}
 
 // function to get user data
 async function getUserData(endpointResource) {
@@ -47,8 +74,7 @@ async function getUserData(endpointResource) {
             throw new Error(`Network response was not okay`);
         }
         const data = await response.json()
-        // add functions or update inneer html or text here
-        console.log(data);
+        // console.log(data);
         bio.innerText = `bio: ${data.bio}`;
         document.getElementById('userFullName').innerText = data.fullName;
         document.getElementById('userName').innerText = username;
@@ -67,8 +93,23 @@ function edit() {
                 <label for="edit-bio" class="form-label">Edit Bio</label>
                 <textarea id="edit-bio" class="form-control" rows="3"></textarea>
             </div>
-            <button class="btn btn-primary" id="updateBioBtn" onclick="editBio(event)">Update</button>
+            <button class="btn btn-primary mt-3" id="updateBioBtn" onclick="editBio(event)">Update</button>
         </form>
+        <form id="change-full-name-form">
+        <div>
+            <label for="new-full-name" class="form-label">Change Name</label>
+            <input type="text" id="new-full-name" class="form-control">
+        </div>
+        <button class="btn btn-primary mt-3" id="changeNameBtn" onclick="changePassword(event)">Update</button>
+     </form>
+        <form id="change-password-form">
+        <div>
+            <label for="new-password" class="form-label">New Password</label>
+            <input type="text" id="new-password" class="form-control">
+        </div>
+        <button class="btn btn-primary mt-3" id="changePasswordBtn" onclick="changePassword(event)">Update</button>
+    </form>
+   
     </div>
    `;
 }
@@ -124,7 +165,7 @@ async function getPost() {
         }
         const data = await response.json()
         // testing
-        
+
         // console.log(data);
         displayPost(data);
     } catch (error) {
@@ -181,7 +222,7 @@ function displayPost(_data) {
     _data.forEach(post => {
         postCard += ` <div class="col-12">
         <!-- Card feed item START -->
-        <div class="card h-100">
+        <div class="card h-100 m-3">
           <!-- Card body START -->
           <div class="card-body">
             <!-- Post User -->
@@ -285,7 +326,7 @@ function displayPost(_data) {
       </div>`;
     });
     display.innerHTML = `
-    <button class="btn btn-primary" onclick="newPostForm()">New Post</button>
+    <button class="btn btn-primary" onclick="newPostForm()" id="newPostBtn">New Post</button>
     <br>
     ${postCard}
     `;
@@ -304,7 +345,8 @@ function getLikedPosts() {
         redirect: 'follow'
     }).then(response => response.json())
         .then(data => {
-            displayLikedPosts(data)
+            displayLikedPosts(data);
+
         })
         .catch(err => {
             alert(`error ${err}`)
@@ -313,6 +355,10 @@ function getLikedPosts() {
 
 // filter through post liked by user
 function displayLikedPosts(_data) {
+  const newPostBtn = document.getElementById('post-btn');
+  if(newPostBtn) {
+    newPostBtn.style.display = 'none';
+  }
     let userLikedPosts = [];
     _data.forEach(post => {
         let likes = post.likes;
@@ -323,11 +369,12 @@ function displayLikedPosts(_data) {
         })
     });
     displayPost(userLikedPosts);
+
 }
 //TODO add buddy functionality
 // request buddy post function 
 function requestBuddy(_username) {
-    const postText = `@${_username} and ${username} #New`;
+    const postText = `@${_username} and @${username} #New`;
     const myNewPost = {
         text: postText
     };
@@ -376,8 +423,9 @@ function saveRequest(requestId) {
         redirect: 'follow'
     }).then(response => response.json())
         .then(data => {
-           
+
             console.log(data);
+
 
         })
         .catch(err => {
@@ -386,8 +434,8 @@ function saveRequest(requestId) {
 }
 
 //  filter through post and find buddy request
-async function findRequests(){
-    
+async function findRequests() {
+
     const baseUrl = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts?limit=10&offset=0&username=";
     const headers = {
         'Accept': 'application/json',
@@ -396,7 +444,7 @@ async function findRequests(){
 
     if (!username) {
         console.error(`User has not logged in`);
-        return;
+        return [];
     }
     try {
         const response = await fetch(baseUrl + username, {
@@ -410,11 +458,13 @@ async function findRequests(){
         const buddyRequest = data.map(item => item._id);
 
         await Promise.all(buddyRequest.map(request => findRequestProfile(request)));
-        
+        console.log(userBuddies);
+        return userBuddies;
+
         // console.log(buddyRequest);
     } catch (error) {
         console.error(`There was a problem with the fetch operation`, error)
-    }  
+    }
 
 }
 
@@ -429,8 +479,8 @@ async function findRequestProfile(id) {
             },
             redirect: 'follow'
         });
-        if(!response.ok) {
-            if(response.status === 404) {
+        if (!response.ok) {
+            if (response.status === 404) {
                 console.warn(`user does not exist`)
             } else {
                 console.log(`${response.status}`)
@@ -446,7 +496,7 @@ async function findRequestProfile(id) {
 }
 
 // function to find request post
-function getRequestPost(_data){
+function getRequestPost(_data) {
     const baseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts/";
     fetch(baseURL + _data, {
         method: 'GET',
@@ -461,9 +511,9 @@ function getRequestPost(_data){
             // use regular expressions to get requested user's username
             const requestedBuddy = message.match(/@(\w+)(?:\s|$)/);
             const requestedBuddyUsername = requestedBuddy ? requestedBuddy[1] : null;
-            console.log(requestedBuddyUsername)
+            // console.log(requestedBuddyUsername)
             addToBuddyList(data.likes, requestedBuddyUsername);
-           
+
         })
         .catch(err => {
             console.log(`error ${err}`)
@@ -472,7 +522,7 @@ function getRequestPost(_data){
 
 // function to add buddy to buddy list
 function addToBuddyList(likesArray, _data) {
-   
+
     for (let index = 0; index < likesArray.length; index++) {
         if (likesArray[index].username === _data) {
             userBuddies.push(_data);
@@ -481,17 +531,202 @@ function addToBuddyList(likesArray, _data) {
     return userBuddies;
 }
 
+// make cards for buddies
+function addBuddyCard(_data, _displayAt) {
+    let displayDiv = document.getElementById(_displayAt);
+    let buddyCard = `
+    <div class="profile-card">
+                    <div class="lines"></div>
+                    <div class="imgBx">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="details">
+                            <h2>${_data.fullName}<br><span>${_data.username}</span></h2>
+                            <div class="data">
+                                <h3>123<br><span>Posts</span></h3>
+                                <h3>120K<br><span>Buddies</span></h3>
+                                <h3>34<br><span>groups</span></h3>
+                            </div>
+                            <div class="actionBtn">
+                                <button class="btn btn-dark">View Profile</button>
+                                <button class="btn btn-light">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    `;
+    displayDiv.insertAdjacentHTML('beforeend', buddyCard);
+
+}
+
+// updated displaayBuddies
+async function displayBuddies(buddiesArray) {
+    console.log(buddiesArray);
+    console.log(`hi`);
+    // Clear the existing buddies
+    userBuddies = [];
+
+    for (let index = 0; index < buddiesArray.length; index++) {
+        const buddy = buddiesArray[index];
+        const baseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/";
+
+        try {
+            const response = await fetch(baseURL + buddy, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                redirect: 'follow'
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response was not okay`);
+            }
+
+            const data = await response.json();
+
+            try {
+                const requestData = await findRequests(buddy);
+                console.log(requestData)
+                // Replace with addBuddyCard function
+                addBuddyCard(data, "buddies");
+                console.log(data);
+            } catch (err) {
+                console.log(`error in findRequest: ${err}`);
+            }
+
+            // Add buddy to the array
+            userBuddies.push(buddy);
+        } catch (err) {
+            console.log(`error ${err}`);
+        }
+    }
+}
+
+// TODO add request buddies card
+
+
+
+// function displayBuddies(buddiesArray) {
+//     console.log(buddiesArray.length);
+//     console.log(`hi`);
+//     if (buddiesArray.length === 0) {
+//         // Handle the case when the array is empty
+//         console.log('No buddies to display.');
+//         return;
+//     }
+
+//     for (const buddy of buddiesArray) {
+//         const baseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/";
+
+//         fetch(baseURL + buddy, {
+//             method: 'GET',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Authorization': `Bearer ${token}`,
+//             },
+//             redirect: 'follow'
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 // replace with add buddy card function
+//                 addBuddyCard(data, "buddies");
+//                 console.log(data)
+//             }).catch(err => {
+//                 console.log(`error ${err}`)
+//             })
+//     };
+// }
+
+// //TODO access spotify api without making user login
+// const clientId = '0c9ac5702fa8405b86233ba19cb49436';
+// const clientSecret = '70d21aa4afbf49469556bf117257442a';
+
+// const tokenEndpoint = 'https://accounts.spotify.com/api/token';
+
+// const credentials = btoa(`${clientId}:${clientSecret}`);
+
+// fetch(tokenEndpoint, {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//         'Authorization': `Basic ${credentials}`
+//     },
+//     body: 'grant_type=client_credentials'
+// })
+//     .then(response => response.json())
+//     .then(data => {
+//         const _accessToken = data.access_token;
+//         // Use this accessToken for making API requests
+//         localStorage.setItem('accessToken', _accessToken);
+//         // console.log(_accessToken);
+//     })
+//     .catch(error => console.error('Error fetching access token:', error));
+
+
+// // TODO add music profile functionality
+// // create favorite song post 
+// function likeTrack(trackName, artist) {
+//     let selectedTrack = `#${trackName} #${artist}`;
+//     const myNewPost = {
+//         text: selectedTrack
+//     };
+
+//     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", {
+//         method: 'POST',
+//         body: JSON.stringify(myNewPost),
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-type': 'application/json',
+//             'Authorization': `Bearer ${token}`
+//         },
+//         redirect: 'follow'
+//     }).then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+//             display.innerHTML = `track added!`;
+//             let likedTrackId = data._id;
+//             //    once request has been made, create user profile with username as post id
+//             saveRequest(likedTrackId);
+//             console.log(likedTrackId)
+//         })
+//         .catch(err => {
+//             alert(`error ${err}`)
+//         });
+// }
+// // search for tracks by keyword
+// function getTrack(trackName, artistName) {
+//     const spotifyToken = JSON.parse(window.localStorage.getItem("acessToken"));
+//     const searchEndpoint = 'https://api.spotify.com/v1/search';
+//     const searchTerm = `${trackName}:${artistName}`;
+
+//     fetch(`${searchEndpoint}?q=${searchTerm}&type=track`, {
+//         method: 'GET',
+//         headers: {
+//             'Authorization': `Bearer ${spotifyToken}`
+//         }
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             // Handle the data, play preview, etc.
+//             console.log(data);
+//             const previewUrl = tracks.items[0].preview_url;
+//             playPreview(previewUrl);
+//         })
+//         .catch(error => console.error('Error searching tracks:', error));
+// }
+
+// function trackCard() {
+
+// }
+
+// // play track preview
+// function playPreview(url) {
+
+// }
 // // display user images
 // function displayUserImages() {
-
-// }
-
-// // display user likes
-// function displayLikedPosts() {
-
-// }
-
-// // display users favorite topics
-// function displayTopics() {
 
 // }
