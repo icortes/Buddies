@@ -1,56 +1,96 @@
 "use strict";
-window.onload = async function () {
-
+window.onload = async function (event) {
+    event.preventDefault();
     document.getElementById('title').innerText = `${username}'s Profile`;
-    // const moodBtn = document.getElementById('change-mood-btn');
-    // const selectMood = document.getElementById('mood-selection');
-    // moodBtn.addEventListener('click', () => {
-    //     const selectedMood = selectMood.value;
-    //     setMood(selectedMood);
-    // })
     getUserData(username);
     // const buddies = await findRequests();
     console.log(userBuddies);
     displayBuddies(userBuddies);
-    addWhoToFollow()
+    addWhoToFollow();
+    setPageMood();
+    changeVideo();
+    
 }
 const username = JSON.parse(localStorage.getItem('login-data')).username;
 const display = document.getElementById("user-display");
 const editForm = document.getElementById("edit-user-data");
 const token = JSON.parse(window.localStorage.getItem("login-data")).token;
+const videoDiv = document.getElementById('video-background');
+
+
 let userBuddies = ['Mia',];
 
-// turn into animation 
-// function greetUser(user) {
-//     document.getElementById("greeting").innerText = `Welcome ${user}`;
-// }
-// add mood change 
 function setMoodSelection() {
+    
+    const selectedMood = localStorage.getItem('selectedMood') || "";
+
     display.innerHTML = `
-    <label for="mood-selection">I'm feeling...</label>
-    <form id="mood-form" class="input-group">
-        <select name="select-mood" id="mood-selection" class="form-control">
-            <option value="none">none</option>
-            <option value="happy">Happy</option>
-            <option value="gloomy">Gloomy</option>
-            <option value="romantic">Romantic</option>
-        </select>
-        <button id="change-mood-btn" class="btn btn-primary" type="button">Change Mood</button>
-    </form>
+        <label for="mood-selection">I'm feeling...</label>
+        <form id="mood-form" class="input-group">
+            <select name="select-mood" id="mood-selection" class="form-control">
+                <option value="" ${selectedMood === "" ? 'selected' : ''}>none</option>
+                <option value="/profile/videos/peaceful.mp4" ${selectedMood === "/profile/videos/peaceful.mp4" ? 'selected' : ''}>Happy</option>
+                <option value="gloomy" ${selectedMood === "gloomy" ? 'selected' : ''}>Gloomy</option>
+                <option value="romantic" ${selectedMood === "romantic" ? 'selected' : ''}>Romantic</option>
+            </select>
+            <button id="change-mood-btn" class="btn btn-primary" onclick="changeVideo()">Change Mood</button>
+        </form>
     `;
+
+    // Call the changeVideo function to set up the initial video
+    changeVideo();
 }
 
-// change background color
-function setMood(_selectedMood) {
-    const body = document.body;
-    if (_selectedMood === 'happy') {
-        body.style.backgroundColor = 'yellow';
-    } else if (_selectedMood === 'gloomy') {
-        body.style.backgroundColor = 'darkgray'; // Change to the desired color for gloomy mood
-    } else if (_selectedMood === 'romantic') {
-        body.style.backgroundColor = 'pink'; // Change to the desired color for romantic mood
+
+function setPageMood() {
+    const selectedMood = localStorage.getItem('selectedMood') || "";
+    const videoDiv = document.getElementById('video-background');
+
+    // Check if the mood is set to "none"
+    if (selectedMood === "none") {
+        // Clear the video div if the mood is set to "none"
+        videoDiv.innerHTML = '';
     } else {
-        body.style.backgroundColor = ''; // Reset to default color if the mood is not recognized
+        // Set up the mood and video if a mood is selected
+        const videoSelector = document.getElementById('mood-selection');
+        const videoSource = document.getElementById('videoSource');
+
+        videoSelector.value = selectedMood;
+        videoSource.src = selectedMood;
+
+        // Create a new video element
+        const videoElement = document.createElement('video');
+        videoElement.id = 'video-background';
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+
+        // Append the video element to the video div
+        videoDiv.innerHTML = ''; // Clear existing content
+        videoDiv.appendChild(videoElement);
+
+        // Load and play the video
+        videoElement.load();
+        videoElement.play();
+    }
+}
+
+function changeVideo() {
+    const videoDiv = document.getElementById('video-background');
+    const videoSelector = document.getElementById('mood-selection');
+    const videoSource = document.getElementById('videoSource');
+    const selectedMood = videoSelector.value;
+
+    // Store the selected mood in localStorage
+    localStorage.setItem('selectedMood', selectedMood);
+
+    // Check if the mood is set to "none" or has no value
+    if (selectedMood === "" || selectedMood === "") {
+        videoDiv.innerHTML = ''; // Clear the video div if the mood is set to "none" or has no value
+    } else {
+        // Set the video source dynamically
+        videoSource.src = selectedMood;
+        videoDiv.load();
+        videoDiv.play(); // Add this line to start playing the video
     }
 }
 
@@ -78,7 +118,7 @@ async function getUserData(endpointResource) {
         // console.log(data);
         bio.innerText = `bio: ${data.bio}`;
         document.getElementById('userFullName').innerText = data.fullName;
-        document.getElementById('userName').innerText = username;
+        document.getElementById('userName').innerText = `@${username}`;
 
     } catch (error) {
         console.error(`There was a problem with the fetch operation`, error)
@@ -101,13 +141,17 @@ function edit() {
             <label for="new-full-name" class="form-label">Change Name</label>
             <input type="text" id="new-full-name" class="form-control">
         </div>
-        <button class="btn btn-primary mt-3" id="changeNameBtn" onclick="changePassword(event)">Update</button>
+        <button class="btn btn-primary mt-3" id="changeNameBtn" onclick="changeFullName(event)">Update</button>
      </form>
         <form id="change-password-form">
         <div>
             <label for="new-password" class="form-label">New Password</label>
-            <input type="text" id="new-password" class="form-control">
+            <input type="password" id="new-password" class="form-control">
         </div>
+        <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="show-pswd" onclick="showPassword()"/>
+                        <label class="form-check-label" for="show-pswd"> Show Password </label>
+                    </div>
         <button class="btn btn-primary mt-3" id="changePasswordBtn" onclick="changePassword(event)">Update</button>
     </form>
    
@@ -142,6 +186,75 @@ function editBio(event) {
             alert(`error ${err}`)
         });
 
+}
+
+// change full name 
+function changeFullName(event) {
+    event.preventDefault();
+    const updatedFullName = document.getElementById("new-full-name").value;
+    let updateName = {
+        fullName: updatedFullName,
+    };
+
+    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + username, {
+        method: 'PUT',
+        body: JSON.stringify(updateName),
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        redirect: 'follow'
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('userFullName').innerText = data.fullName;
+            display.innerText = `Full Name has been changed!`;
+        })
+        .catch(err => {
+            alert(`error ${err}`)
+        });
+
+}
+
+function changePassword(event) {
+    event.preventDefault();
+    const updatedPassword = document.getElementById("new-password").value;
+    let newPassword = {
+        password: updatedPassword,
+    };
+
+    fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/users/" + username, {
+        method: 'PUT',
+        body: JSON.stringify(newPassword),
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        redirect: 'follow'
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            display.innerText = `password has been changed!`;
+        })
+        .catch(err => {
+            alert(`error ${err}`)
+        });
+
+}
+
+// pavlo show password function
+
+function showPassword() {
+    // grab password to make it visible when user checks the box.
+    let password = document.getElementById('new-password');
+    if (password.type === "password") {
+        password.type = "text";
+    }
+    else {
+        password.type = "password";
+    }
 }
 
 // when post button is clicked get all of this user's post
@@ -368,6 +481,41 @@ function displayLikedPosts(_data) {
     displayPost(userLikedPosts);
 
 }
+
+// when media button is clicked get all user's media post
+async function getMediaPosts() {
+    const baseUrl = "http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts?limit=10&offset=0&username=";
+    const headers = {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+
+    if (!baseUrl) {
+        console.error(`User has not logged in`);
+        return;
+    }
+    try {
+        const response = await fetch(baseUrl + username, {
+            method: 'GET',
+            headers: headers
+        });
+        if (!response.ok) {
+            throw new Error(`Network response was not okay`);
+        }
+        const data = await response.json()
+        // filter through data
+        const filteredPost = data.filter(post => /^(<img|<video|<audio)/.test(post.text));
+
+        // console.log(data);
+        // console.log(filteredPost)
+        displayPost(filteredPost);
+    } catch (error) {
+        console.error(`There was a problem with the fetch operation`, error)
+    }
+}
+
+
+
 //TODO add buddy functionality
 // request buddy post function 
 function requestBuddy(_username) {
@@ -645,7 +793,7 @@ async function addWhoToFollow() {
                 </div>`;
 
         connectionsContainer.insertAdjacentHTML('beforeend', connectionHtml);
-        
+
     }
 
     let viewMore = `
@@ -685,95 +833,4 @@ async function addWhoToFollow() {
 //                 console.log(`error ${err}`)
 //             })
 //     };
-// }
-
-// //TODO access spotify api without making user login
-// const clientId = '0c9ac5702fa8405b86233ba19cb49436';
-// const clientSecret = '70d21aa4afbf49469556bf117257442a';
-
-// const tokenEndpoint = 'https://accounts.spotify.com/api/token';
-
-// const credentials = btoa(`${clientId}:${clientSecret}`);
-
-// fetch(tokenEndpoint, {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/x-www-form-urlencoded',
-//         'Authorization': `Basic ${credentials}`
-//     },
-//     body: 'grant_type=client_credentials'
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         const _accessToken = data.access_token;
-//         // Use this accessToken for making API requests
-//         localStorage.setItem('accessToken', _accessToken);
-//         // console.log(_accessToken);
-//     })
-//     .catch(error => console.error('Error fetching access token:', error));
-
-
-// // TODO add music profile functionality
-// // create favorite song post 
-// function likeTrack(trackName, artist) {
-//     let selectedTrack = `#${trackName} #${artist}`;
-//     const myNewPost = {
-//         text: selectedTrack
-//     };
-
-//     fetch("http://microbloglite.us-east-2.elasticbeanstalk.com/api/posts", {
-//         method: 'POST',
-//         body: JSON.stringify(myNewPost),
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         },
-//         redirect: 'follow'
-//     }).then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//             display.innerHTML = `track added!`;
-//             let likedTrackId = data._id;
-//             //    once request has been made, create user profile with username as post id
-//             saveRequest(likedTrackId);
-//             console.log(likedTrackId)
-//         })
-//         .catch(err => {
-//             alert(`error ${err}`)
-//         });
-// }
-// // search for tracks by keyword
-// function getTrack(trackName, artistName) {
-//     const spotifyToken = JSON.parse(window.localStorage.getItem("acessToken"));
-//     const searchEndpoint = 'https://api.spotify.com/v1/search';
-//     const searchTerm = `${trackName}:${artistName}`;
-
-//     fetch(`${searchEndpoint}?q=${searchTerm}&type=track`, {
-//         method: 'GET',
-//         headers: {
-//             'Authorization': `Bearer ${spotifyToken}`
-//         }
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             // Handle the data, play preview, etc.
-//             console.log(data);
-//             const previewUrl = tracks.items[0].preview_url;
-//             playPreview(previewUrl);
-//         })
-//         .catch(error => console.error('Error searching tracks:', error));
-// }
-
-// function trackCard() {
-
-// }
-
-// // play track preview
-// function playPreview(url) {
-
-// }
-// // display user images
-// function displayUserImages() {
-
 // }

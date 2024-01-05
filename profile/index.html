@@ -36,10 +36,26 @@
         <!-- page header -->
         <!-- <h1 id="greeting"></h1> -->
     </header>
+    <!-- Dropdown Menu -->
+    <!-- <div id="content">
+        <h1>Select a Video</h1>
+        <select id="videoSelector" onchange="changeVideo()">
+            <option value="/profile/videos/peaceful.mp4">Video 1</option>
+            <option value="">Video 2</option>
+        </select>
+    </div> -->
 
+    <!-- Background Video -->
+    <div id="video-background">
+        <video id="video-background" autoplay loop>
+            <source id="videoSource" src="/profile/videos/peaceful.mp4">
+        </video>
+    </div>
+    
 
     <!-- main content -->
     <main>
+
         <div class="row">
             <div id="profile-background-overlay"></div>
             <!-- USER SIDEBAR SECTION -->
@@ -216,7 +232,7 @@
                             <button class="change-display-btn nav-link" onclick="getPost()">Post</button>
                         </li>
                         <li class="nav-item">
-                            <button class="change-display-btn nav-link">Images</button>
+                            <button class="change-display-btn nav-link" onclick="getMediaPosts()">Media</button>
                         </li>
                         <li class="nav-item">
                             <button class="change-display-btn nav-link" onclick="getLikedPosts()">Likes</button>

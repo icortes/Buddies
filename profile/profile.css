@@ -1,11 +1,11 @@
 body {
     /* background: url(/assets/images/sf-filler-img.jpeg);
     background-size: cover; */
-    background: #531755;
     background: linear-gradient(0deg, #531755a7 0%, #6ac2f08c 50%, #fff76091 100%);
-    min-height: 100vh;
     cursor: url(https://cdn.custom-cursor.com/db/10520/32/minimal-axolotl-cursor.png), auto !important;
     transition: background-color 0.5s ease;
+    margin: 0;
+    overflow: hidden
 }
 
 a {
@@ -24,7 +24,29 @@ textarea {
     cursor: url(https://cdn.custom-cursor.com/db/13077/32/cute-cats-in-frogs-hat-pointer.png),
         pointer !important;
 }
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 
+#content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+}
 #user-profile-container {
     margin: auto;
 }
