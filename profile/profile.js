@@ -1,5 +1,5 @@
 'use strict';
-window.onload = async function (event) {
+window.onload = async function () {
     document.getElementById('title').innerText = `${username}'s Profile`;
     getUserData(username);
     // const buddies = await findRequests();
@@ -15,28 +15,35 @@ const display = document.getElementById('user-display');
 const editForm = document.getElementById('edit-user-data');
 const token = JSON.parse(window.localStorage.getItem('login-data')).token;
 const videoDiv = document.getElementById('video-background');
+display.style.color = 'white';
+let userBuddies = ['testUser'];
 
-let userBuddies = ['Mia'];
+function addVideo() {
+    videoDiv.innerHTML = `
+    <video id="video-background" autoplay loop>
+    <source id="videoSource" src="/profile/videos/peaceful.mp4">
+    </video>
+    `
+}
 
 function setMoodSelection() {
-    const selectedMood = localStorage.getItem('selectedMood') || '';
+
+    const selectedMood = localStorage.getItem('selectedMood') || "";
 
     display.innerHTML = `
-        <label for="mood-selection">I'm feeling...</label>
-        <form id="mood-form" class="input-group">
-            <select name="select-mood" id="mood-selection" class="form-control">
-                <option value="" ${selectedMood === '' ? 'selected' : ''}>none</option>
-                <option value="/profile/videos/peaceful.mp4" ${selectedMood === '/profile/videos/peaceful.mp4' ? 'selected' : ''
-        }>Happy</option>
-                <option value="/profile/videos/storm.mp4" ${selectedMood === '/profile/videos/storm.mp4' ? 'selected' : ''
-        }>Mad</option>
-                <option value="/profile/videos/fireworks.mp4" ${selectedMood === '/profile/videos/fireworks.mp4' ? 'selected' : ''
-        }>Excited</option>
-                <option value="/profile/videos/cozy.mp4" ${selectedMood === '/profile/videos/cozy.mp4' ? 'selected' : ''
-        }>Cozy</option>
-            </select>
-            <button id="change-mood-btn" class="btn btn-primary" onclick="changeVideo()">Change Mood</button>
-        </form>
+        <label for="mood-selection">Mood:</label>
+        <div class="form-group">
+        <select name="select-mood" id="mood-selection" class="form-control">
+            <option value="" ${selectedMood === "" ? 'selected' : ''}>Freshly Installed Operating System Vibes</option>
+            <option value="/profile/videos/peaceful.mp4" ${selectedMood === "/profile/videos/peaceful.mp4" ? 'selected' : ''}>Meeting Your Online Friends in Real Life for the First Time</option>
+            <option value="/profile/videos/storm.mp4" ${selectedMood === "/profile/videos/storm.mp4" ? 'selected' : ''}>Adele-level Emotional Rollercoaster</option>
+            <option value="/profile/videos/rain.mp4" ${selectedMood === "/profile/videos/fireworks.mp4" ? 'selected' : ''}>listening to Sad Drake Songs</option>
+            <option value="/profile/videos/cozy_vibes.mp4" ${selectedMood === "/profile/videos/cozy_vibes.mp4" ? 'selected' : ''}>Procrastinating in Pajamas</option>
+            <option value="/profile/videos/romance.mp4" ${selectedMood === "/profile/videos/romance.mp4" ? 'selected' : ''}>Spotify Serenade Session</option>
+
+        </select>
+        <button id="change-mood-btn" class="btn btn-primary mt-5" onclick="changeVideo()">Change Mood</button>
+    </div>
     `;
 
     // Call the changeVideo function to set up the initial video
@@ -44,37 +51,23 @@ function setMoodSelection() {
 }
 
 function setPageMood() {
-    const selectedMood = localStorage.getItem('selectedMood') || '';
-    const videoDiv = document.getElementById('video-background');
+    const selectedMood = localStorage.getItem('selectedMood') || "";
+    const videoSource = document.getElementById('videoSource');
+    const videoElement = document.getElementById('video-background');
 
-    // Check if the mood is set to "none"
-    if (selectedMood === 'none') {
-        // Clear the video div if the mood is set to "none"
-        videoDiv.innerHTML = '';
+    // Set the video source dynamically
+    videoSource.src = selectedMood;
+
+    // Check if the mood is set to "none" or has no value
+    if (selectedMood === "" || selectedMood === null) {
+        // Pause the video
+        videoElement.pause();
     } else {
-        // Set up the mood and video if a mood is selected
-        const videoSelector = document.getElementById('mood-selection');
-        const videoSource = document.getElementById('videoSource');
-
-        videoSelector.value = selectedMood || "";
-        videoSource.src = selectedMood;
-
-        // Create a new video element
-        const videoElement = document.createElement('video');
-        videoElement.id = 'video-background';
-        videoElement.autoplay = true;
-        videoElement.loop = true;
-
-        // Append the video element to the video div
-        videoDiv.innerHTML = ''; // Clear existing content
-        videoDiv.appendChild(videoElement);
-
         // Load and play the video
         videoElement.load();
         videoElement.play();
     }
 }
-
 function changeVideo() {
     const videoDiv = document.getElementById('video-background');
     const videoSelector = document.getElementById('mood-selection');
@@ -85,7 +78,7 @@ function changeVideo() {
     localStorage.setItem('selectedMood', selectedMood);
 
     // Check if the mood is set to "none" or has no value
-    if (selectedMood === '' || selectedMood === null) {
+    if (selectedMood === "" || selectedMood === null) {
         // Clear the video div and pause the video
         videoDiv.innerHTML = '';
         videoDiv.load();
