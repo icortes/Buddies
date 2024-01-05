@@ -355,10 +355,7 @@ function getLikedPosts() {
 
 // filter through post liked by user
 function displayLikedPosts(_data) {
-  const newPostBtn = document.getElementById('post-btn');
-  if(newPostBtn) {
-    newPostBtn.style.display = 'none';
-  }
+ 
     let userLikedPosts = [];
     _data.forEach(post => {
         let likes = post.likes;

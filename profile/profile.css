@@ -1,7 +1,9 @@
 body {
     /* background: url(/assets/images/sf-filler-img.jpeg);
     background-size: cover; */
-    background-color: #E9ECEF;
+    background: #531755;
+    background: linear-gradient(0deg, #531755a7 0%, #6ac2f08c 50%, #fff76091 100%);
+    min-height: 100vh;
     transition: background-color 0.5s ease;
 }
 a {
