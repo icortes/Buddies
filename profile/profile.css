@@ -4,11 +4,25 @@ body {
     background: #531755;
     background: linear-gradient(0deg, #531755a7 0%, #6ac2f08c 50%, #fff76091 100%);
     min-height: 100vh;
+    cursor: url(https://cdn.custom-cursor.com/db/10520/32/minimal-axolotl-cursor.png), auto !important;
     transition: background-color 0.5s ease;
 }
+
 a {
+    cursor: url(https://cdn.custom-cursor.com/db/10519/32/minimal-axolotl-pointer.png),
+        pointer !important;
     text-decoration: none;
     color: #fff;
+}
+
+button {
+    cursor: url(https://cdn.custom-cursor.com/db/10519/32/minimal-axolotl-pointer.png),
+        pointer !important;
+}
+
+textarea {
+    cursor: url(https://cdn.custom-cursor.com/db/13077/32/cute-cats-in-frogs-hat-pointer.png),
+        pointer !important;
 }
 
 #user-profile-container {
@@ -28,9 +42,9 @@ a {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: white;
     z-index: -2;
-    height: 100vh;
+    min-height: fit-content;
     position: absolute;
-    top: 20%;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -46,20 +60,30 @@ a {
 #edit-img {
     max-width: 20px;
 }
+
 #mood {
     border: none;
     background-color: transparent;
     display: flex;
     font-size: small;
 }
+
 #mood-img {
     max-width: 20px;
 }
+
 #bestie-title {
     padding-bottom: 100px;
     color: #fff;
-    
+
 }
+
+#whoToFollow {
+    margin-right: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
 .user-card {
     background-color: #C3BEC4;
 }
@@ -94,9 +118,13 @@ a {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    padding-top: 50px;
     padding-bottom: 20px;
     overflow: hidden;
+    margin-right: 1.25rem;
+    margin-top: 1.25rem;
 }
+
 
 
 
@@ -113,6 +141,7 @@ a {
 
 .profile-card:hover {
     height: 350px;
+    width: 75%;
 }
 
 .profile-card .lines {
@@ -156,7 +185,7 @@ a {
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    width: 45%;
+    width: 65%;
     /* height: 150px; */
     aspect-ratio: 1 / 1;
     background: #000;
@@ -167,7 +196,7 @@ a {
 }
 
 .profile-card:hover .imgBx {
-    width: 55%;
+    width: 60%;
     /* height: 250px; */
     aspect-ratio: 1 / 1;
 }
@@ -214,6 +243,7 @@ a {
     position: absolute;
     width: 100%;
     height: 100%;
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -221,7 +251,7 @@ a {
 }
 
 .profile-card .content .details {
-    padding: 40px;
+    /* padding: 40px; */
     text-align: center;
     width: 100%;
     transition: 0.5s;
@@ -250,6 +280,7 @@ a {
     justify-content: space-between;
     margin: 20px 0;
 }
+
 .profile-card .content .details .data h3 {
     font-size: 1em;
     color: #fff;
@@ -267,10 +298,9 @@ a {
 .profile-card .content .details .actionBtn {
     display: flex;
     justify-content: space-between;
-    gap:20px;
+    gap: 20px;
 }
 
 .profile-card .content .details .actionBtn button:nth-child(1) {
     background: #CE64F3;
 }
-

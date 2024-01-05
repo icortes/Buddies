@@ -355,7 +355,6 @@ function getLikedPosts() {
 
 // filter through post liked by user
 function displayLikedPosts(_data) {
- 
     let userLikedPosts = [];
     _data.forEach(post => {
         let likes = post.likes;
@@ -603,7 +602,57 @@ async function displayBuddies(buddiesArray) {
 }
 
 // TODO add request buddies card
+async function addWhoToFollow() {
+    let connectionsContainer = document.getElementById('connectionsContainer');
 
+    const baseUrl =
+        'http://microbloglite.us-east-2.elasticbeanstalk.com/api/users?limit=10';
+    const headers = {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+    };
+    const resposeUsers = await fetch(baseUrl, {
+        method: 'GET',
+        headers,
+    });
+
+    const users = await resposeUsers.json();
+
+    for (const user of users) {
+
+        let connectionHtml = `
+                <div class="hstack gap-2 mb-3 rounded connection">
+
+                    <div class="avatar ms-2">
+                        <a href="#">
+                            <img class="avatar-img rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="" width="48px"/>
+                        </a>
+                    </div>
+                    
+                    <div class="overflow-hidden">
+                        <a class="h6 mb-0" href="#!">${user.fullName} </a>
+                        <p class="mb-0 small text-truncate">${user.bio}</p>
+                    </div>
+                    
+                    <button
+                        class="btn btn-primary-soft rounded-circle icon-md ms-auto"
+                        onclick="addFriend();"
+                        data-username="${user}">
+
+                        <i class="bi bi-plus-circle fs-3"></i>
+                    </button>
+                </div>`;
+
+        connectionsContainer.insertAdjacentHTML('beforeend', connectionHtml);
+        
+    }
+
+    let viewMore = `
+                  <div class="d-grid mt-3">
+                    <a class="btn btn-sm btn-primary-soft" href="#">View more</a>
+                  </div>`;
+    connectionsContainer.insertAdjacentHTML('beforeend', viewMore);
+}
 
 
 // function displayBuddies(buddiesArray) {
