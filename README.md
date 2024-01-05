@@ -29,7 +29,7 @@ Here is the sample image of the post page:
 
 ### 4. profile/index.html
 Here is the sample image of the profile page:
-![Profile page]()
+![Profile page](/assets/readme/profile-sample.png)
 
 ### 5. Code Highlight:
 
