@@ -16,7 +16,7 @@ const editForm = document.getElementById('edit-user-data');
 const token = JSON.parse(window.localStorage.getItem('login-data')).token;
 const videoDiv = document.getElementById('video-background');
 display.style.color = 'white';
-let userBuddies = ['testUser'];
+let userBuddies = ['testUser123'];
 
 function addVideo() {
     videoDiv.innerHTML = `
