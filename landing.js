@@ -22,8 +22,20 @@ loginForm.onsubmit = function (event) {
     }
 
     // Disables the button after the form has been submitted already:
-    loginForm.loginButton.disabled = true;
+    // loginForm.loginButton.disabled = true;
 
     // Time to actually process the login using the function from auth.js!
     login(loginData);
 };
+
+
+function showPassword(){
+    // grab password to make it visible when user checks the box.
+    let password = document.getElementById('password');
+    if(password.type === "password"){
+        password.type = "text";
+    }
+    else{
+        password.type = "password";
+    }
+}

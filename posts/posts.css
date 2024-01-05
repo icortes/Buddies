@@ -1,7 +1,29 @@
 /* Posts Page CSS */
+
+:root {
+  --card-bg: #d4b2ff;
+  --card-highlight: #ae93d3;
+}
+
+body {
+  cursor: url(https://cdn.custom-cursor.com/db/10520/32/minimal-axolotl-cursor.png), auto !important;
+}
+
 a {
+  cursor: url(https://cdn.custom-cursor.com/db/10519/32/minimal-axolotl-pointer.png),
+    pointer !important;
   text-decoration: none;
   color: inherit;
+}
+
+button {
+  cursor: url(https://cdn.custom-cursor.com/db/10519/32/minimal-axolotl-pointer.png),
+    pointer !important;
+}
+
+textarea {
+  cursor: url(https://cdn.custom-cursor.com/db/13077/32/cute-cats-in-frogs-hat-pointer.png),
+    pointer !important;
 }
 
 a:hover {
@@ -9,10 +31,29 @@ a:hover {
 }
 
 body {
-  background-color: #E9ECEF;
+  background: #531755;
+  background: linear-gradient(0deg, #531755a7 0%, #6ac2f08c 50%, #fff76091 100%);
+  min-height: 100vh;
 }
 
 .user-card {
-    background-color: #C3BEC4;
-    border-color: purple;
+  background-color: var(--card-bg);
+  border-color: purple;
+}
+
+.post-content {
+  background-color: var(--card-highlight);
+}
+
+.hover {
+  a:hover {
+    background-color: var(--card-highlight);
+  }
+  button:hover {
+    background-color: var(--card-highlight);
+  }
+}
+
+.connection:hover {
+  background-color: var(--card-highlight);
 }

@@ -20,8 +20,9 @@
     <link rel="stylesheet" href="../global.css" />
 
     <!-- Page-specific CSS -->
-    <link rel="stylesheet" href="./posts.css" />
+    <link rel="stylesheet" href="../posts/posts.css" />
 
+    <link rel="icon" href="/assets/icons/icon2.PNG">
     <title>Posts</title>
 
     <!-- Run BEFORE page is finished loading (before window.onload): -->
@@ -30,10 +31,10 @@
       if (isLoggedIn() === false) window.location.replace('/');
     </script>
   </head>
-  <body class="bg-body-secondary" data-bs-theme="">
+  <body>
     <header></header>
 
-    <main class="container-lg my-5" id="main">
+    <main class="container-lg my-3" id="main">
       <div class="row">
         <!-- USER SIDEBAR SECTION -->
         <div class="col-12 col-lg-3">
@@ -126,38 +127,38 @@
                     <hr />
 
                     <!-- Side Nav START -->
-                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
+                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2 hover">
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="/"> 🏠 <span>Feed</span></a>
+                        <a class="nav-link text-dark rounded" href="/"> 🏠 <span>Feed</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="">
+                        <a class="nav-link text-dark rounded" href="">
                           🔗 <span>Connections </span></a
                         >
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="">
+                        <a class="nav-link text-dark rounded" href="">
                           🌎 <span>Latest News </span></a
                         >
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href=""> 🗓️ <span>Events </span></a>
+                        <a class="nav-link text-dark rounded" href=""> 🗓️ <span>Events </span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href=""> 💬 <span>Groups </span></a>
+                        <a class="nav-link text-dark rounded" href=""> 💬 <span>Groups </span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="">
+                        <a class="nav-link text-dark rounded" href="">
                           🔔 <span>Notifications </span></a
                         >
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="">
+                        <a class="nav-link text-dark rounded" href="">
                           ⚙️ <span>Settings </span></a
                         >
                       </li>
                       <li class="nav-item">
-                        <button class="nav-link text-dark" onclick="logout();">
+                        <button class="nav-link text-dark rounded w-100 text-start" onclick="logout();">
                           🔚 <span>Log Out </span>
                         </button>
                       </li>
@@ -167,7 +168,7 @@
                   <!-- Card body END -->
                   <!-- Card footer -->
                   <div class="card-footer text-center py-2">
-                    <a class="btn btn-link btn-sm text-dark" href="">View Profile </a>
+                    <a class="btn btn-link btn-sm text-dark" href="/profile">View Profile </a>
                   </div>
                 </div>
                 <!-- Card END -->
@@ -230,18 +231,18 @@
               </form>
             </div>
             <!-- Share feed toolbar START -->
-            <ul class="nav nav-pills nav-stack small fw-normal">
-              <li class="nav-item">
+            <ul class="nav nav-pills small fw-normal">
+              <li class="nav-item pe-1">
                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!">
                   <i class="bi bi-image-fill text-success pe-2"></i>Photo</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item pe-1">
                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!">
                   <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item pe-1">
                 <a href="#" class="nav-link bg-light py-1 px-2 mb-0">
                   <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event
                 </a>
@@ -315,6 +316,6 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"></script>
     <!-- Page-specific code -->
-    <script src="./posts.js"></script>
+    <script src="../posts/posts.js"></script>
   </body>
 </html>
