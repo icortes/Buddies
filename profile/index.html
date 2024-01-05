@@ -54,7 +54,7 @@
      -->
 
     <!-- main content -->
-    <main>
+    <main class="container-lg my-3">
 
         <div class="row">
             <div id="profile-background-overlay"></div>
@@ -71,7 +71,7 @@
                 <!-- Advanced filter responsive toggler END -->
 
                 <!-- Sidebar START-->
-                <nav class="navbar navbar-expand-lg m-5 pt-0">
+                <nav class="navbar navbar-expand-lg pt-0">
                     <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
                         <!-- Offcanvas header -->
                         <div class="offcanvas-header">
@@ -82,7 +82,7 @@
                         <!-- Offcanvas body -->
                         <div class="offcanvas-body d-block px-2 px-lg-0">
                             <!-- Card START -->
-                            <div class="card overflow-hidden">
+                            <div class="card overflow-hidden user-card">
                                 <!-- Cover image -->
                                 <!-- <div
                       class="h-50px"
@@ -93,15 +93,15 @@
                         background-repeat: no-repeat;
                       "></div> -->
                                 <!-- Card body START -->
-                                <div class="card-body pt-3 user-card">
+                                <div class="card-body pt-3">
                                     <div class="text-center">
                                         <button id="edit" onclick="edit()">
                                             <img id="edit-img" src="/assets/icons/edit.png" alt="edit">
-                                            <p>edit profile</p>
+                                            <p class="ms-1">edit profile</p>
                                         </button>
                                         <button id="mood" onclick="setMoodSelection()">
                                             <img id="mood-img" src="/assets/icons/emoticons.png" alt="mood">
-                                            <p>set mood</p>
+                                            <p class="ms-1">set mood</p>
                                         </button>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-lg mt-n5 mb-3">
@@ -148,34 +148,34 @@
                                     <hr />
 
                                     <!-- Side Nav START -->
-                                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
+                                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2 hover">
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="/"> 🏠 <span>Feed</span></a>
+                                            <a class="nav-link text-dark rounded" href="/"> 🏠 <span>Feed</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="">
+                                            <a class="nav-link text-dark rounded" href="">
                                                 🔗 <span>Connections </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="">
+                                            <a class="nav-link text-dark rounded" href="">
                                                 🌎 <span>Latest News </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> 🗓️ <span>Events </span></a>
+                                            <a class="nav-link text-dark rounded" href=""> 🗓️ <span>Events </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href=""> 💬 <span>Groups </span></a>
+                                            <a class="nav-link text-dark rounded" href=""> 💬 <span>Groups </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="">
+                                            <a class="nav-link text-dark rounded" href="">
                                                 🔔 <span>Notifications </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" href="">
+                                            <a class="nav-link text-dark rounded" href="">
                                                 ⚙️ <span>Settings </span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <button class="nav-link text-dark" onclick="logout();">
+                                            <button class="nav-link text-dark rounded w-100 text-start" onclick="logout();">
                                                 🔚 <span>Log Out </span>
                                             </button>
                                         </li>
@@ -183,10 +183,7 @@
                                     <!-- Side Nav END -->
                                 </div>
                                 <!-- Card body END -->
-                                <!-- Card footer -->
-                                <div class="card-footer text-center py-2">
-                                    <a class="btn btn-link btn-sm" href="index.html">View Profile </a>
-                                </div>
+                                
                             </div>
                             <!-- Card END -->
 
@@ -225,7 +222,7 @@
                 <!-- Navbar END-->
             </div>
             <!-- center display -->
-            <div class="col-12 col-lg-6">
+            <div class="col overflow-hidden">
                 <div>
                     <ul class="nav nav-underline" id="display-user-data-type">
                         <li class="nav-item">
@@ -242,15 +239,16 @@
                         </li>
                     </ul>
                 </div>
-                <div id="user-display">
+                <div class="row g-4 mt-3" id="user-display">
                     <!-- use Javascript to fill -->
 
                 </div>
-
             </div>
+
+            
             <!-- right sidebar section -->
-            <div class="col-12 col-lg-3" id="right-side">
-                <div class="boxes" id="best-buddy">
+            <div class="col-lg-3" id="right-side">
+                <div class="boxes mt-0" id="best-buddy">
                     <!-- best buddy's profile card -->
                     <h2 id="bestie-title"></h2>
                     <div class="profile-card">
@@ -279,7 +277,7 @@
 
                 </div>
 
-                <div class="card rounded-4 mt-lg-5 user-card mt-5" id="whoToFollow">
+                <div class="card rounded-4 mt-lg-4 user-card mt-5" id="whoToFollow">
                     <!-- Card header START -->
                     <div class="card-header pb-0 border-0">
                         <h5 class="card-title mb-1">Who to follow</h5>
@@ -303,7 +301,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <!-- app.js -->
-    <script src="profile.js"></script>
+    <script src="/profile/profile.js"></script>
     <script src="/auth.js"></script>
 </body>
 

@@ -1,3 +1,8 @@
+:root {
+    --card-bg: #d4b2ff;
+    --card-highlight: #ae93d3;
+}
+
 body {
     /* background: url(/assets/images/sf-filler-img.jpeg);
     background-size: cover; */
@@ -5,7 +10,7 @@ body {
     cursor: url(https://cdn.custom-cursor.com/db/10520/32/minimal-axolotl-cursor.png), auto !important;
     transition: background-color 0.5s ease;
     margin: 0;
-    overflow: hidden
+    /* overflow: hidden; */
 }
 
 a {
@@ -13,6 +18,10 @@ a {
         pointer !important;
     text-decoration: none;
     color: #fff;
+}
+
+a:hover {
+    color: purple;
 }
 
 button {
@@ -24,6 +33,7 @@ textarea {
     cursor: url(https://cdn.custom-cursor.com/db/13077/32/cute-cats-in-frogs-hat-pointer.png),
         pointer !important;
 }
+
 #video-background {
     position: fixed;
     top: 0;
@@ -40,13 +50,13 @@ textarea {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
 }
 
 select {
     padding: 10px;
     font-size: 16px;
 }
+
 #user-profile-container {
     margin: auto;
 }
@@ -59,7 +69,11 @@ select {
 }
 
 #profile-background-overlay {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.29) 20.31%, rgba(0, 0, 0, 0.50) 48.96%, rgba(0, 0, 0, 0.50) 70.31%);
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.29) 20.31%,
+            rgba(0, 0, 0, 0.5) 48.96%,
+            rgba(0, 0, 0, 0.5) 70.31%);
     backdrop-filter: blur(7.5px);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: white;
@@ -97,7 +111,6 @@ select {
 #bestie-title {
     padding-bottom: 100px;
     color: #fff;
-
 }
 
 #whoToFollow {
@@ -106,8 +119,27 @@ select {
     margin-bottom: 1.25rem;
 }
 
+.post-content {
+    background-color: var(--card-highlight);
+}
+
 .user-card {
-    background-color: #C3BEC4;
+    background-color: var(--card-bg) !important;
+    border-color: purple;
+}
+
+.hover {
+    a:hover {
+        background-color: var(--card-highlight);
+    }
+
+    button:hover {
+        background-color: var(--card-highlight);
+    }
+}
+
+.connection:hover {
+    background-color: var(--card-highlight);
 }
 
 .nav-img {
@@ -115,7 +147,9 @@ select {
 }
 
 .overlay {
-    background: linear-gradient(180deg, rgba(123, 120, 126, 0.16) 0%, rgba(123, 120, 126, 0.35) 100%);
+    background: linear-gradient(180deg,
+            rgba(123, 120, 126, 0.16) 0%,
+            rgba(123, 120, 126, 0.35) 100%);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(2.5px);
     color: white;
@@ -125,15 +159,15 @@ select {
 
 .change-display-btn {
     background-color: transparent;
-    color: white;
+    color: purple;
     border: none;
     font-size: 30px;
     font-family: Kadwa;
 }
 
 .boxes {
-    background-color: #C3BEC4;
-    border-radius: 21px;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
     min-height: 30vh;
     max-height: fit-content;
     display: flex;
@@ -145,11 +179,11 @@ select {
     overflow: hidden;
     margin-right: 1.25rem;
     margin-top: 1.25rem;
+    color: var(--card-bg);
+    border-style: solid;
+    border-width: 1px;
+    border-color: purple;
 }
-
-
-
-
 
 /* other users profile cards */
 .profile-card {
@@ -181,7 +215,7 @@ select {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 120px;
-    background: linear-gradient(transparent, #CE64F3, #CE64F3, #CE64F3, transparent);
+    background: linear-gradient(transparent, #ce64f3, #ce64f3, #ce64f3, transparent);
     animation: animate 4s linear infinite;
 }
 
@@ -231,7 +265,7 @@ select {
     width: 500px;
     height: 150px;
     transform: translate(-50%, -50%);
-    background: linear-gradient(transparent, #F3D57D, #F3D57D, #F3D57D, transparent);
+    background: linear-gradient(transparent, #f3d57d, #f3d57d, #f3d57d, transparent);
     animation: animate2 6s linear infinite;
 }
 
@@ -308,7 +342,6 @@ select {
     color: #fff;
     line-height: 1.2em;
     font-weight: 600;
-
 }
 
 .profile-card .content .details .data h3 span {
@@ -324,5 +357,5 @@ select {
 }
 
 .profile-card .content .details .actionBtn button:nth-child(1) {
-    background: #CE64F3;
+    background: #ce64f3;
 }
