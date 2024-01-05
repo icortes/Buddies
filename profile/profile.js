@@ -22,7 +22,7 @@ let userBuddies = ['Mia',];
 
 function setMoodSelection() {
     
-    const selectedMood = localStorage.getItem('selectedMood') || "";
+     const selectedMood = localStorage.getItem('selectedMood') || "";
 
     display.innerHTML = `
         <label for="mood-selection">I'm feeling...</label>
@@ -30,8 +30,9 @@ function setMoodSelection() {
             <select name="select-mood" id="mood-selection" class="form-control">
                 <option value="" ${selectedMood === "" ? 'selected' : ''}>none</option>
                 <option value="/profile/videos/peaceful.mp4" ${selectedMood === "/profile/videos/peaceful.mp4" ? 'selected' : ''}>Happy</option>
-                <option value="gloomy" ${selectedMood === "gloomy" ? 'selected' : ''}>Gloomy</option>
-                <option value="romantic" ${selectedMood === "romantic" ? 'selected' : ''}>Romantic</option>
+                <option value="/profile/videos/storm.mp4" ${selectedMood === "/profile/videos/storm.mp4" ? 'selected' : ''}>Mad</option>
+                <option value="/profile/videos/fireworks.mp4" ${selectedMood === "/profile/videos/fireworks.mp4" ? 'selected' : ''}>Excited</option>
+                <option value="/profile/videos/cozy.mp4" ${selectedMood === "/profile/videos/cozy.mp4" ? 'selected' : ''}>Cozy</option>
             </select>
             <button id="change-mood-btn" class="btn btn-primary" onclick="changeVideo()">Change Mood</button>
         </form>
@@ -84,13 +85,16 @@ function changeVideo() {
     localStorage.setItem('selectedMood', selectedMood);
 
     // Check if the mood is set to "none" or has no value
-    if (selectedMood === "" || selectedMood === "") {
-        videoDiv.innerHTML = ''; // Clear the video div if the mood is set to "none" or has no value
+    if (selectedMood === "" || selectedMood === null) {
+        // Clear the video div and pause the video
+        videoDiv.innerHTML = '';
+        videoDiv.load();
+        videoDiv.pause();
     } else {
         // Set the video source dynamically
         videoSource.src = selectedMood;
         videoDiv.load();
-        videoDiv.play(); // Add this line to start playing the video
+        videoDiv.play(); // Start playing the video
     }
 }
 
